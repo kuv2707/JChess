@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=rook
+comment1.params=ubi\ teamCol
+comment1.target=rook(java.awt.Point,\ java.awt.Color)
+comment2.params=g
+comment2.target=rook(pawn)
+comment3.params=p
+comment3.target=stepstaken\ movedTo(java.awt.Point)
+comment4.params=g
+comment4.target=rook(goti)
+comment5.params=
+comment5.target=java.util.ArrayList\ possibleLocations()
+numComments=6

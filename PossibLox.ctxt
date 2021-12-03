@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=PossibLox
+comment1.params=c
+comment1.target=PossibLox(java.awt.Color)
+comment2.params=c
+comment2.target=boolean\ isFor(Player)
+comment3.params=
+comment3.target=void\ show()
+comment4.params=
+comment4.target=void\ run()
+comment5.params=
+comment5.target=void\ fadeAway()
+comment6.params=
+comment6.target=void\ run()
+numComments=7

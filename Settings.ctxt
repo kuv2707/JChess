@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Settings
+comment1.params=
+comment1.target=Settings()
+comment10.params=g
+comment10.target=void\ paintComponent(java.awt.Graphics)
+comment2.params=ee
+comment2.target=void\ itemStateChanged(java.awt.event.ItemEvent)
+comment3.params=
+comment3.target=void\ run()
+comment4.params=e
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=me
+comment5.target=void\ mousePressed(java.awt.event.MouseEvent)
+comment6.params=me
+comment6.target=void\ mouseReleased(java.awt.event.MouseEvent)
+comment7.params=me
+comment7.target=void\ mouseDragged(java.awt.event.MouseEvent)
+comment8.params=me
+comment8.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment9.params=
+comment9.target=void\ switchState()
+numComments=11

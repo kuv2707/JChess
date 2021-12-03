@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=MessageAnimator
+comment1.params=s\ b
+comment1.target=MessageAnimator(java.lang.String,\ boolean)
+comment2.params=
+comment2.target=void\ run()
+comment3.params=g
+comment3.target=void\ drawContent(java.awt.Graphics2D)
+comment4.params=
+comment4.target=void\ printData()
+numComments=5

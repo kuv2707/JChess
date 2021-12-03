@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Environment
+comment1.params=k
+comment1.target=void\ setK(float)
+comment1.text=\r\n\ make\ it\ more\ readable\ by\ creating\ objects\ having\ 3\ fields\r\n\ leftend,\ rightend,\ currentloc\ \ \ representing\ colors\r\n\ \r\n
+comment10.params=c
+comment10.target=java.awt.Color\ getOppositeColor(java.awt.Color)
+comment11.params=
+comment11.target=void\ __loadGame__()
+comment2.params=
+comment2.target=boolean\ isDarkMode()
+comment3.params=b
+comment3.target=void\ setDarkMode(boolean)
+comment4.params=
+comment4.target=void\ run()
+comment5.params=
+comment5.target=void\ run()
+comment6.params=message
+comment6.target=void\ log(java.lang.String)
+comment7.params=message
+comment7.target=void\ log2(java.lang.String)
+comment8.params=yesno
+comment8.target=void\ recordGame(boolean)
+comment9.params=
+comment9.target=boolean\ canRecordGame()
+numComments=12

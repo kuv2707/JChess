@@ -1,0 +1,23 @@
+host starts.
+
+client establishes a socket connection to the ip address accepted.
+
+host gets client's ip address and ends the connection.
+
+client makes 2 objects:
+local client 
+online host
+
+server makes 2 objects:
+local host
+online client
+
+local client is ready to accept a socket connection from the server  (from doHandShakeWith() method)
+through a Networks object.
+meaning that the server's client object makes a socket connection to a port in client's ip
+and that connection is received by a Networks object, which is then linked to the local player (Human) 
+object of the client.
+
+
+online host is ready to accept a socket connection from the server  (from doHandShakeWith() method)
+

@@ -1,0 +1,46 @@
+
+
+Version:	3.14
+CmdLine:	D:\Program files\BlueJ\chess\output.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\Program files\BlueJ\chess\.
+Java min ver:	1.000.000
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+32-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+32-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\15.0.1
+Check launcher:	C:\Program Files\Java\jdk-15.0.1\bin\javaw.exe (OK)
+Match:		1.015.000_001
+Runtime used:	1.015.000_001 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-15.0.1\bin\javaw.exe
+Launcher args:	-jar "D:\Program files\BlueJ\chess\output.exe"
+Args length:	46/32768 chars
+Exit code:	259
+
+
+Version:	3.14
+CmdLine:	D:\Program files\BlueJ\chess\output.exe --l4j-debug
+WOW64:		yes
+Working dir:	D:\Program files\BlueJ\chess\.
+Java min ver:	1.000.000
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+32-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+32-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+32-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Check:		SOFTWARE\JavaSoft\JDK\15.0.1
+Check launcher:	C:\Program Files\Java\jdk-15.0.1\bin\javaw.exe (OK)
+Match:		1.015.000_001
+Runtime used:	1.015.000_001 (64-bit)
+Launcher:	C:\Program Files\Java\jdk-15.0.1\bin\javaw.exe
+Launcher args:	-jar "D:\Program files\BlueJ\chess\output.exe"
+Args length:	46/32768 chars
+Exit code:	259

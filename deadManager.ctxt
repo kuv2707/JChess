@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=deadManager
+comment1.params=
+comment1.target=void\ initlox()
+comment2.params=g
+comment2.target=java.awt.Point\ getFreeLocation(goti)
+numComments=3

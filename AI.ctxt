@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=AI
+comment1.params=
+comment1.target=void\ playMove()
+comment10.params=
+comment10.target=void\ endMove()
+comment2.params=c\ difficulty
+comment2.target=AI(java.awt.Color,\ int)
+comment3.params=
+comment3.target=void\ run()
+comment4.params=
+comment4.target=void\ destroy()
+comment5.params=container
+comment5.target=javax.swing.JPanel\ getEntryMenu(javax.swing.JFrame)
+comment6.params=ce
+comment6.target=void\ stateChanged(javax.swing.event.ChangeEvent)
+comment7.params=e
+comment7.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment8.params=
+comment8.target=javax.swing.JComponent\ getMouseEventCauser()
+comment9.params=
+comment9.target=java.lang.String\ getRevivalCandidate()
+numComments=11

@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=modalYesNo
+comment1.params=jlab\ yestxt\ notxt\ c
+comment1.target=modalYesNo(java.lang.String,\ java.lang.String,\ java.lang.String,\ flash)
+comment2.params=ae
+comment2.target=void\ mouseClicked(java.awt.event.MouseEvent)
+comment3.params=
+comment3.target=void\ run()
+comment4.params=
+comment4.target=int\ run()
+comment5.params=
+comment5.target=void\ run()
+numComments=6

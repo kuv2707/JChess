@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=utility
+comment1.params=y
+comment1.target=void\ appearDialog(javax.swing.JDialog)
+comment2.params=
+comment2.target=void\ run()
+comment3.params=y
+comment3.target=void\ disappearDialog(javax.swing.JDialog)
+comment4.params=
+comment4.target=void\ run()
+comment5.params=y
+comment5.target=void\ appearJFrame(javax.swing.JFrame)
+comment6.params=
+comment6.target=void\ run()
+comment7.params=y
+comment7.target=void\ disappearJFrame(javax.swing.JFrame)
+comment8.params=
+comment8.target=void\ run()
+numComments=9

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=FileHandler
+comment1.params=alg
+comment1.target=void\ writeMove(java.lang.String)
+comment2.params=
+comment2.target=void\ exitTask()
+numComments=3

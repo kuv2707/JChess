@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=king
+comment1.params=ubi\ teamCol
+comment1.target=king(java.awt.Point,\ java.awt.Color)
+comment2.params=g
+comment2.target=king(goti)
+comment3.params=p
+comment3.target=stepstaken\ movedTo(java.awt.Point)
+comment4.params=k
+comment4.target=void\ setCastleProperty(CastleProperty)
+comment5.params=
+comment5.target=void\ removeCastleProperty()
+comment6.params=
+comment6.target=CastleProperty\ getCastleProperty()
+comment7.params=
+comment7.target=java.util.ArrayList\ possibleLocations()
+numComments=8

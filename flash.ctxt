@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=flash
+comment1.params=
+comment1.target=void\ screenshot()
+comment2.params=
+comment2.target=flash()
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=wait
+comment4.target=void\ darken(int)
+comment5.params=wait
+comment5.target=void\ lighten(int)
+numComments=6

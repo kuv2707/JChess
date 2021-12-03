@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=TimeType
+comment1.params=t
+comment1.target=TimeType(java.lang.String)
+comment1.text=\r\n\ if\ unlimited\ time\ is\ passed,\ the\ name\ labels\ in\ gui\ will\ show\ infinity\ symbol\ or\ maybe\ show\ nothing\r\n\ this\ class\ converts\ options\ to\ hour,\ minutes,\ seconds\ which\ will\ then\ be\ displayed\ in\ the\ name\ labels\r\n\ \r\n
+comment2.params=s\ m\ h
+comment2.target=TimeType(int,\ int,\ int)
+comment3.params=
+comment3.target=boolean\ isUnlimited()
+comment4.params=
+comment4.target=int\ getSeconds()
+comment5.params=
+comment5.target=int\ getMinutes()
+comment6.params=
+comment6.target=int\ getHours()
+numComments=7

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Networks
+comment1.params=p\ port
+comment1.target=Networks(Online,\ int)
+comment2.params=
+comment2.target=void\ run()
+numComments=3

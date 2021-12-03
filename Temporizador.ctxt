@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Temporizador
+comment0.text=\r\n\ this\ class\ should\ work\ in\ two\ modes\:\r\n\ calculate\ the\ time\ \r\n\ cater\ the\ time\ to\ the\ client\r\n
+comment1.params=c
+comment1.target=Temporizador(Player)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment3.params=
+comment3.target=java.awt.Color\ getTeamColor()
+comment4.params=
+comment4.target=java.lang.String\ getUCITime()
+comment5.params=
+comment5.target=void\ analyzeTimeType()
+comment6.params=
+comment6.target=java.lang.String\ getTime()
+comment7.params=
+comment7.target=void\ start()
+comment8.params=
+comment8.target=void\ pause()
+numComments=9

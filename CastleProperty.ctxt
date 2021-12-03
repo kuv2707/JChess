@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=CastleProperty
+comment1.params=
+comment1.target=boolean\ isValid()
+comment2.params=kingloc\ newrookloc\ therook
+comment2.target=void\ bind(java.awt.Point,\ java.awt.Point,\ rook)
+comment3.params=p
+comment3.target=boolean\ isInPlace(java.awt.Point)
+comment4.params=p
+comment4.target=java.lang.Object[]\ getCastlePropertySet(java.awt.Point)
+comment5.params=kl
+comment5.target=rook\ getRookToCastleWith(java.awt.Point)
+numComments=6

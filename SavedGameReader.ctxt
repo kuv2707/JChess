@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=SavedGameReader
+comment1.params=c
+comment1.target=SavedGameReader(java.awt.Color)
+comment10.params=
+comment10.target=java.lang.String\ getRevivalCandidate()
+comment2.params=
+comment2.target=void\ run()
+comment3.params=
+comment3.target=void\ playMove()
+comment4.params=
+comment4.target=void\ endMove()
+comment5.params=container
+comment5.target=javax.swing.JPanel\ getEntryMenu(javax.swing.JFrame)
+comment6.params=e
+comment6.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment7.params=
+comment7.target=javax.swing.JComponent\ getMouseEventCauser()
+comment8.params=
+comment8.target=void\ connectFile()
+comment9.params=
+comment9.target=void\ destroy()
+numComments=11

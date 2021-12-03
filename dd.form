@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="dd">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="30" y="52" width="490" height="291"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="53ed9" class="javax.swing.JButton" binding="button1" default-binding="true">
+        <constraints border-constraint="North"/>
+        <properties>
+          <text value="Button"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

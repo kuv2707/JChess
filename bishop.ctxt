@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=bishop
+comment1.params=ubi\ teamCol
+comment1.target=bishop(java.awt.Point,\ java.awt.Color)
+comment2.params=g
+comment2.target=bishop(goti)
+comment3.params=g
+comment3.target=bishop(pawn)
+comment4.params=p
+comment4.target=stepstaken\ movedTo(java.awt.Point)
+comment5.params=
+comment5.target=java.util.ArrayList\ possibleLocations()
+numComments=6
