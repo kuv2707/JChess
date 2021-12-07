@@ -22,42 +22,40 @@ class MessageAnimator implements Runnable
     /*
      * squareX,squareY,squareWidth,squareHeight,fontSize,Opacity
      */
-    static double[] data=
-    {
-        maxWidth/2,
-        0,
-        0,
-        0,
-        0,
-        0
-    };
+    static float squareX,squareY,squareWidth,squareHeight,fontSize,opacity;
+    
     public void run()//see dimensions of messages dont exceed space in drawing panel 
     {
         /**
          * start from top-center of the game area
          * enlarge till width is equal to game area's width
          */
-        data=new double[]{maxWidth/2,0,0,0,0,0};
+        squareX=maxWidth/2;
+        squareY=0;
+        squareWidth=0;
+        squareHeight=0;
+        fontSize=0;
+        opacity=0;
         
         
-        double k=0;
+        float k=0;
         while(k<1)//while squares touches left boundary of chessboard
         {
-            data[0]=(int)(maxWidth/2+(0-maxWidth/2)*k);//square moves in X direction from 320 to 0
+            //squareX=(int)(maxWidth/2+(0-maxWidth/2)*k);//square moves in X direction from 320 to 0
             
             
-            data[1]=(int)(0+(320-data[4])*k);//square moves in X direction from 320 to 0
+            squareY=(int)(0+(320-fontSize)*k);//square moves in X direction from 320 to 0
             
             
-            data[3]=2*data[4];
-            data[5]=(int)(0+(220)*k);//opacity increases
-            font=new Font("LEPIFONT",Font.PLAIN,(int)data[4]);
+            squareHeight=2*fontSize;
+            opacity=(int)(0+(220)*k);//opacity increases
+            font=new Font("LEPIFONT",Font.PLAIN,(int)fontSize);
             FontMetrics fm=game.getChessBoard().pan.getFontMetrics(font);
             int width=fm.stringWidth(greet);
-            data[2]=width;
-            //data[0]+=(maxWidth-width)/2;
+            squareWidth=width;
+            squareX=(maxWidth-width)/2;
             if(width<maxWidth-20)
-            data[4]+=1;
+            fontSize+=1;
             
             //printData();
             k+=0.01;
@@ -79,7 +77,7 @@ class MessageAnimator implements Runnable
         k=0;
         while(k<1)
         {
-            data[5]=220*(1-k);
+            opacity=220*(1-k);
             k+=0.01;
             game.getChessBoard().refresh();
             try
@@ -95,45 +93,27 @@ class MessageAnimator implements Runnable
     }
     public static void drawContent(Graphics2D g)
     {
-        //draw greeting
-        /*
-                Font f=;
-                
-                g.setFont(f);
-                g.setColor(new Color(50,120,200,opacrect));
-                int txtht=fm.getHeight();
-                int txtwd=fm.stringWidth(greet);
-                g.fill(new RoundRectangle2D.Double((int)grx-2-(fm.stringWidth(greet)/2),(int)gry-txtht,txtwd+6,(txtht*3/2),50,50));
-                g.setColor(new Color(245, 203, 167,opactext));
-                
-                
-                */
-               Color bgc,tc;
+        
+        Color bgc,tc;
                //maybe transition these colors
         if(Environment.isDarkMode())
         {
-            bgc=new Color(32, 51, 51,(int)data[5]);
-            tc=new Color(250,250,250,(int)data[5]);
+            bgc=new Color(32, 51, 51,(int)opacity);
+            tc=new Color(250,250,250,(int)opacity);
             
         }
         else
         {
-            bgc=new Color(255, 232, 224,(int)data[5]);
-            tc=new Color(0,0,0,(int)data[5]);
+            bgc=new Color(255, 232, 224,(int)opacity);
+            tc=new Color(0,0,0,(int)opacity);
             
         }
         
         g.setColor(bgc);
-        g.fill(new RoundRectangle2D.Double(data[0],data[1],data[2],data[3],50,50)); 
+        g.fill(new RoundRectangle2D.Double(squareX,squareY,squareWidth,squareHeight,50,50)); 
         g.setColor(tc);
         g.setFont(font);
-        g.drawString(greet,(int)data[0],(int)(data[1]+(data[3]+data[4])/2));
+        g.drawString(greet,(int)squareX,(int)(squareY+(squareHeight+fontSize)/2));
     }
-    public static void printData()
-    {
-        System.out.println();
-        for(double i: data)
-        System.out.print(i+"\t");
-        System.out.println();
-    }
+    
 }

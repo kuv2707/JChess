@@ -94,7 +94,7 @@ class Promotion extends JDialog implements MouseMotionListener,MouseListener
         {
             public void run()
             {
-                audio.play("choice");
+                audio.play("choose");
             }
         }).start();
         utility.appearDialog(this);

@@ -33,8 +33,8 @@ class nameLabel extends JLabel
             
             nameLabel este=this;
             //online players are not renamable 
-            if(player.renamable)//dont forget to change when players are able to change type mid-game, like from manual to AI: at that time the renamable attribute will change
-            {
+            //dont forget to change when players are able to change type mid-game, like from manual to AI: at that time the renamable attribute will change
+            
                 addMouseListener(new MouseAdapter()
                 {
                     public void mouseClicked(MouseEvent e)
@@ -44,8 +44,13 @@ class nameLabel extends JLabel
                             Environment.log(player.toString());
                             updateName();
                         }
-                        if(!game.isGameActive()  ||  player.hasCheck)
+                        if(!game.isGameActive()  ||  player.hasCheck  )
                         return;
+                        if( !player.renamable)
+                        {
+                            removeMouseListener(this);
+                            return;
+                        }
                         if(SwingUtilities.isRightMouseButton(e))
                         {
                             JPopupMenu p=new JPopupMenu();
@@ -75,7 +80,7 @@ class nameLabel extends JLabel
                         }
                     }
                 });
-            }
+            
                 
         }
         public void refresh()

@@ -4,35 +4,58 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.*;
+import java.util.concurrent.CountDownLatch;
 import java.io.*;
 
 public class Online extends Player
 {
     Socket peer;
+    CountDownLatch getrev;
     public Online(Color c, String nam) {
         super(c, nam);
+        renamable=false;
     }
     @Override
     public String getRevivalCandidate()
     {
-        while(revival.equals(""))
+        //getrev=new CountDownLatch(1);
+        //USE A FUCKING LATCH!
+        Environment.log("want revival candidate ");
+        int o=0;
+        while(revival.toString().equals(""))
         {
+            Environment.log("awaiting "+o);
+            o++;
+            System.out.println("fdsfs"+o);
             try
             {
-                Thread.sleep(20);
+                /**
+                 * for some reason it never executes
+                 * the signal for releasing mouse comes
+                 * with the revival candidate chosen by the user
+                 * why so?
+                 * string encountered revv:?
+4840350936700  Waiting for instructions
+4840353627600  want revival candidate
+
+revival candidate is received before the receiver needs it
+                 */
+                revival.wait();
+                
+                //getrev.await();
             }
             catch (InterruptedException ie)
             {
                 ie.printStackTrace();
             }
         }
-        String s=revival;
-        revival="";
+        String s=revival.toString();
+        revival.setLength(0);
         return s;
     }
     @Override
     public void playMove() {
-        game.getOpponentOf(this).endMove();
+        
     }
     @Override
     public void destroy()
@@ -145,7 +168,7 @@ public class Online extends Player
                         String nom=name.getText();
                         if(nom.equals(""))
                             nom="player2";
-                            Human player=new Human(goti.colBlak,nom);
+                            NetHuman player=new NetHuman(goti.colBlak,nom);
                             Online host=new Online(goti.colWhit,"<none>");
 
                             
@@ -273,7 +296,7 @@ public class Online extends Player
                     if(nom.equals(""))
                         nom="player1";
                     
-                    Human player=new Human(goti.colWhit,nom);
+                    NetHuman player=new NetHuman(goti.colWhit,nom);
                     Online client=new Online(goti.colBlak,"<client>");
                     
                     
@@ -340,7 +363,7 @@ public class Online extends Player
     }
     public void endMove()
     {
-        
+        //no use
     }
     
 }

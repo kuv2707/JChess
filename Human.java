@@ -1,29 +1,16 @@
 import java.awt.*;
 import javax.swing.*;
-
-
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 class Human extends Player
 {
-    ObjectOutputStream peer_send ;
-    Socket peer;
+    
     public Human(Color c, String s)
     {
         super(c,s);
     }
     public void destroy()
     {
-        
-        if(peer!=null)
-            try {
-                peer_send.close();
-                peer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                
     }
     @Override
     public String getRevivalCandidate()
@@ -44,109 +31,14 @@ class Human extends Player
                 goties=new Image[]{game.blakQueen,game.blakRook,game.blakNait,game.blakBishop};
             }
             Promotion dialog=new Promotion(gui.frame,goties,MouseInfo.getPointerInfo().getLocation());//dialog appears where mouse pointer is
-            String resp=dialog.run();
-            try
-            {
-                peer_send.writeObject("revv:"+resp);
-                peer_send.flush();
-            }
-            catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            return resp;
+            
+            
+            return dialog.run();
         }
     }
-    MouseAdapter ma=new MouseAdapter() {
-        public void mousePressed(MouseEvent e)
-        {
-            if(e.getSource().equals(getMouseEventCauser()))
-            {
-                Networks.senderSequence.execute(new Runnable() {
-                    public void run()
-                    {
-                        try
-                        {
-                            
-                            peer_send.writeObject(new Object[]
-                            {
-                                e.getX(),e.getY(),
-                                Networks.select
-                               
-                            });
-                            peer_send.flush();
-                        }
-                        catch(Exception e)
-                        {
+    
         
-                        }
-                    }
-                });
-            }
-
-        }
-        public void mouseDragged(MouseEvent me)
-        {
-            if(me.getSource().equals(getMouseEventCauser()))
-            {
-                Networks.senderSequence.execute(new Runnable() {
-                    public void run()
-                    {
-                        try
-                        {
-                            peer_send.writeObject(new Object[]
-                            {
-                                me.getX(),me.getY(),
-                                Networks.drag
-                                
-                            });
-                            peer_send.flush();
-                        }
-                        catch(Exception e)
-                        {
-        
-                        }
-                    }
-                });
-            }
-        }
-        public void mouseReleased(MouseEvent me)
-        {
-            if(me.getSource().equals(getMouseEventCauser()))
-            {
-                Networks.senderSequence.execute(new Runnable() {
-                    public void run()
-                    {
-                        try
-                        {
-                            peer_send.writeObject(new Object[]
-                            {
-                                me.getX(),me.getY(),
-                                Networks.put
-                                
-                            });
-                            peer_send.flush();
-                        }
-                        catch(Exception e)
-                        {
-        
-                        }
-                    }
-                });
-            }
-        }
-    };
-    public void playMove()
-    {
-        game.getOpponentOf(this).endMove();
-        game.getChessBoard().pan.addMouseListener(ma);
-        game.getChessBoard().pan.addMouseMotionListener(ma);
-    }
-    public void endMove()
-    {
-        game.getChessBoard().pan.removeMouseListener(ma);
-        game.getChessBoard().pan.removeMouseMotionListener(ma);
-    }
+    
     public JComponent getMouseEventCauser()
     {
         return game.getChessBoard().pan;
@@ -243,16 +135,15 @@ class Human extends Player
             proc.addMouseListener(mouse);
             return local;
     }
-    public void doHandShakeWith(String ip,int port)throws Exception
-    {
-        peer=new Socket(ip,port);
-        Environment.log(" handshaked"+port);
-        //Networks.writeToSocket("start the game i guess",peer);
-        peer.getOutputStream().flush();
-        peer_send=new ObjectOutputStream(peer.getOutputStream());
-        Object nam=getName();
-        peer_send.writeObject("name:"+nam);
-        peer_send.flush();
+    @Override
+    public void playMove() {
+        
         
     }
+    @Override
+    public void endMove() {
+        
+        
+    }
+    
 }

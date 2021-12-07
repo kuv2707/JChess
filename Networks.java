@@ -6,7 +6,7 @@ import java.io.*;
 import java.awt.event.*;
 class Networks implements Runnable
 {
-    Player player;
+    Online player;
     ObjectInputStream instream;
     public static final Byte put=3;
     public static final Byte select=1;
@@ -58,7 +58,21 @@ class Networks implements Runnable
                         if(header.equals("name:"))
                         player.name=content;
                         if(header.equals("revv:"))
-                        player.revival=content;
+                        {
+                            synchronized(player.revival)
+                            {
+                                player.revival.setLength(0);
+                                player.revival.append(content);
+                                player.revival.notify();
+                            }
+                            
+                            //USE A LATCH
+                            //player.getrev.countDown();
+                        }
+                        if(header.equals("renm:"))
+                        {
+                            player.setName(content);
+                        }
                                                 
                         continue;
                     }

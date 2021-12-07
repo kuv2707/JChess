@@ -500,6 +500,7 @@ abstract class goti
                
               
               game.nowturnof.setActivatedTurn();
+              game.getOpponentOf(game.nowturnof).endMove();
                   game.nowturnof.playMove();
                
         }

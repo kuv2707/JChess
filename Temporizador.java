@@ -77,15 +77,15 @@ class Temporizador
     }
     public void analyzeTimeType()
     {
-        TimeType t=game.timeGame;
+        //TimeType t=game.timeGame;
         if(true)//if unlimited time then no point in analyzing
         {
             ignoreme=true;
             return;
         }
-        timeSec=t.getSeconds();
-        timeMin=t.getMinutes();
-        timeHr=t.getHours();
+        //timeSec=t.getSeconds();
+        //timeMin=t.getMinutes();
+        //timeHr=t.getHours();
     }
     public String getTime()
     {

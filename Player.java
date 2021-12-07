@@ -23,7 +23,7 @@ abstract class Player extends JComponent//for easy use in gui events
     nameLabel lab;
     boolean isActivatedTurn=false;
     boolean renamable=true;
-    volatile String revival="";
+    volatile StringBuffer revival=new StringBuffer();
     boolean hasCheck=false;
     public Player(Color c, String nam)
     {

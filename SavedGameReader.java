@@ -61,7 +61,8 @@ class SavedGameReader extends Player
                             //System.out.println(data);
                         if(data.length()-1 ==c)
                         {    
-                            revival=""+data.charAt(c);
+                            revival.setLength(0);
+                            revival.append(""+data.charAt(c));
 
                         }
                             
@@ -94,7 +95,7 @@ class SavedGameReader extends Player
     @Override
     public void playMove()
     {
-        game.getOpponentOf(this).endMove();
+        
         gui.gameEvents.execute(Turn);
     }
     public void endMove()
@@ -174,6 +175,6 @@ class SavedGameReader extends Player
     @Override
     public String getRevivalCandidate()
     {
-        return revival;
+        return revival.toString();
     }
 }

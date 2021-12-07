@@ -256,7 +256,7 @@ class gui implements MouseListener,MouseMotionListener
                 if(me.getSource()==drag)
                 {
                     //dragmouseroutine(me);//hate it!
-                    //seq.execute(new MessageAnimator(MessageAnimator.starts,true));
+                    shockwave.execute(new MessageAnimator(MessageAnimator.starts,true));
                 }
                 if(me.getSource()==close)
                 {

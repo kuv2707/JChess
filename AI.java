@@ -59,16 +59,18 @@ class AI extends Player
             
                 if( (to.y==7  ||  to.y==0) &&  (goti.gotiAt(fr) instanceof pawn))//
                 {
+                    String rrevival="";
                     char rev=p.charAt(4);
                     if(rev=='q')
-                    revival=goti.rani;
+                    rrevival=goti.rani;
                     if(rev=='k')
-                    revival=goti.ghora;
+                    rrevival=goti.ghora;
                     if(rev=='r')
-                    revival=goti.hathi;
+                    rrevival=goti.hathi;
                     if(rev=='b')
-                    revival=goti.mandir;
-                
+                    rrevival=goti.mandir;
+                    revival.setLength(0);
+                    revival.append(rrevival);
                 }
             
                 actualAction(fr,to);
@@ -270,10 +272,10 @@ class AI extends Player
     @Override
     public String getRevivalCandidate()
     {
-        return revival;
+        return revival.toString();
     }
     public void endMove()
     {
-        
+        //no use
     }
 }
