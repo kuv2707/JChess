@@ -1,4 +1,4 @@
-import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 class eyeProtector extends JSlider

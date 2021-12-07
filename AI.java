@@ -166,8 +166,9 @@ class AI extends Player
             grab.setBounds(10,200,150,30);
             grab.setOpaque(false);
             grab.setFocusable(false);
-            
-            JComboBox jcb=new JComboBox(TimeType.times);
+            //make time displayer objects so that getSelectedItem() directly returns the time object
+            //then no need to calculate time duration from the string
+            JComboBox<String> jcb=new JComboBox<>(TimeType.times);
             jcb.setBounds(190,200,120,30);
         
             

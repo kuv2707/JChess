@@ -97,7 +97,6 @@ class king extends goti
         Point currL=this.getLocation();
         int x=(int)currL.getX();
         int y=(int)currL.getY();
-        int counter=0;
         ArrayList<Point> l=new ArrayList<Point>();
         l.add(new Point(x+1,y));
         l.add(new Point(x+1,y+1));

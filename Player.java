@@ -74,9 +74,6 @@ abstract class Player extends JComponent//for easy use in gui events
             ie.printStackTrace();
         }
         double k=0;
-        double accn=0,accn2=0;
-        
-        
         moverA=gui.guidelegate(moverA,true);
         
         

@@ -2,7 +2,6 @@ import java.awt.*;
 import javax.swing.*; 
 import java.awt.geom.*;
 import java.awt.event.*;
-import javax.swing.event.*;
 class Settings extends JPanel
     {
         JFrame fra;
@@ -19,7 +18,7 @@ class Settings extends JPanel
             fra.setIconImage(game.icon);
             fra.getContentPane().setLayout(null);
             String[] set=new String[]{"Fantasy ","Fantasy 2 ","Katz ","Eyes ","Classic ","Freak ","Skull "};
-            JComboBox change=new JComboBox(set);
+            JComboBox<String> change=new JComboBox<>(set);
             change.setOpaque(false);
             change.setToolTipText("Change the appearance of the pieces");
             change.setSelectedItem(game.folder);

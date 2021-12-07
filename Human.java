@@ -1,6 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
+
 
 import java.awt.event.*;
 import java.io.IOException;
@@ -22,7 +22,6 @@ class Human extends Player
                 peer_send.close();
                 peer.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
     }
@@ -198,7 +197,7 @@ class Human extends Player
             grab.setOpaque(false);
             grab.setFocusable(false);
             
-            JComboBox jcb=new JComboBox(TimeType.times);
+            JComboBox<String> jcb=new JComboBox<String>(TimeType.times);
             jcb.setBounds(190,200,120,30);
             
             local.add(grab);
@@ -246,7 +245,7 @@ class Human extends Player
     }
     public void doHandShakeWith(String ip,int port)throws Exception
     {
-        Socket peer=new Socket(ip,port);
+        peer=new Socket(ip,port);
         Environment.log(" handshaked"+port);
         //Networks.writeToSocket("start the game i guess",peer);
         peer.getOutputStream().flush();

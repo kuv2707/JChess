@@ -61,7 +61,6 @@ class knight extends goti
         Point currL=this.getLocation();
         int x=(int)currL.getX();
         int y=(int)currL.getY();
-        int counter=0;
         ArrayList<Point> l=new ArrayList<Point>();
         l.add(new Point(x+2,y+1));
         l.add(new Point(x+2,y-1));

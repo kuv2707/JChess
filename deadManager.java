@@ -2,13 +2,13 @@ import java.util.*;
 import java.awt.*;
 public class deadManager
 {
-    static ArrayList<Point> lox=new ArrayList();
+    static ArrayList<Point> lox=new ArrayList<>();
     static int stackbottom,stacktop;
     public static void initlox()
     {
         for(int i=420;i<620;i+=40)
         {
-            for(int j=680;j<=gui.pan.getWidth()+565-140;j+=40)
+            for(int j=680;j<=game.getChessBoard().pan.getWidth()+540;j+=40)
             {
                 lox.add(new Point(j,i));
             }

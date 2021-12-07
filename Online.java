@@ -240,7 +240,7 @@ public class Online extends Player
         grab.setOpaque(false);
         grab.setFocusable(false);
 
-        JComboBox<Object> jcb=new JComboBox(TimeType.times);
+        JComboBox<String> jcb=new JComboBox<>(TimeType.times);
         jcb.setBounds(190,200,120,30);
 
         host.add(proch);
@@ -323,9 +323,12 @@ public class Online extends Player
     }
     public static String getOpponentIP() throws IOException {
         
-        Socket s=new ServerSocket(2707).accept();
+        ServerSocket ss=new ServerSocket(2707);
+        Socket s=ss.accept();
+        
         String ip=(((InetSocketAddress) s.getRemoteSocketAddress()).getAddress()).toString().replace("/","");
         s.close();
+        ss.close();
         return ip;
         
     }

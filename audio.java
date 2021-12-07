@@ -1,18 +1,11 @@
-import java.io.File;
-import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Scanner;
-
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.*;
-import javax.sound.sampled.UnsupportedAudioFileException;
 class audio
 {
     static Clip clip;
-    static HashMap<String, URL> Name_Stream=new HashMap();
+    static HashMap<String, URL> Name_Stream=new HashMap<>();
       
     public static void load() throws Exception
     {

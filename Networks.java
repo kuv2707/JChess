@@ -2,7 +2,7 @@ import java.net.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.io.*;
-import java.awt.*;
+
 import java.awt.event.*;
 class Networks implements Runnable
 {
@@ -12,16 +12,19 @@ class Networks implements Runnable
     public static final Byte select=1;
     public static final Byte drag=2;
     public static ExecutorService senderSequence=Executors.newFixedThreadPool(1);
+    
     public Networks(Online p,int port)
     {
         player=p;
         
         try {
-            ServerSocket ss=new ServerSocket(port);
-            Socket s=ss.accept();
-            s.getOutputStream().flush();
-            Environment.log("Accepted connection in network class "+port);
-            instream=new ObjectInputStream(s.getInputStream());
+            try (ServerSocket ss = new ServerSocket(port)) {
+                Socket s=ss.accept();
+                //ss.close();
+                s.getOutputStream().flush();
+                Environment.log("Accepted connection in network class "+port);
+                instream=new ObjectInputStream(s.getInputStream());
+            }
             //readMessages();
             /**
              * host computer's client object is linked to client computer's client object
@@ -90,6 +93,7 @@ class Networks implements Runnable
                 {
                     e.printStackTrace();
                     gui.gameEvents.execute(new MessageAnimator(MessageAnimator.discn,false));
+                    break;
                 }
             }
     }

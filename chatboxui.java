@@ -1,10 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import javax.imageio.ImageIO;
-import java.io.*;
 import java.awt.event.*;
-import javax.swing.text.*;
-import javax.swing.UIManager.*;
 public class chatboxui extends JPanel
 {
     Point bf;

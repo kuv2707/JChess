@@ -1,5 +1,3 @@
-import java.util.*;
-import java.awt.*;
 
 class daemonOrderKeeper extends Thread
 {
@@ -13,7 +11,7 @@ class daemonOrderKeeper extends Thread
         
             try
             {
-                this.sleep(1500);
+                sleep(1500);
             }
             catch (InterruptedException ie)
             {

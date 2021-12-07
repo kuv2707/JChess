@@ -1,6 +1,4 @@
-import java.awt.event.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.awt.geom.AffineTransform;

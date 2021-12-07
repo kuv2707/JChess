@@ -1,4 +1,3 @@
-import java.util.*;
 class TimeType
 {
     static String[] times={"Untimed","01 minute","10 minutes","30 minutes","1 hour","2 hours","3 hours"};

@@ -1,4 +1,4 @@
-import java.util.*;
+
 import java.awt.*;
 import java.awt.geom.*;
 class MessageAnimator implements Runnable

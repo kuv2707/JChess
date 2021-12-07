@@ -15,7 +15,7 @@ class game implements Runnable
     static goti[][] chessBoard=new goti[8][8];
     static volatile int turnNumber=0;//to be initialized to 1 the first time gui.turnmanager executes
     private static boolean isGameActive=true;
-    static HashMap<Integer,String> FENmoveHist =new HashMap();
+    static HashMap<Integer,String> FENmoveHist =new HashMap<>();
     static int gamescore=0; 
     
     
@@ -47,8 +47,8 @@ class game implements Runnable
     static Image icon,cameraicon;
     static  gui gg;
     static String folder="/Fantasy";
-    static ArrayList<Task> endTasks=new ArrayList();
-    static ArrayList<Task> startTasks=new ArrayList();
+    static ArrayList<Task> endTasks=new ArrayList<>();
+    static ArrayList<Task> startTasks=new ArrayList<>();
     static TimeType timeGame;
     /**
      * the constructor should just accept the player objects

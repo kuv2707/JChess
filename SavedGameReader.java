@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.*;
 import java.io.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -35,8 +34,6 @@ class SavedGameReader extends Player
                     }
                 }
                 
-                Byte task;
-                Point laststart=null;
                 String flag=FileHandler.not_end;
                 try
                 {

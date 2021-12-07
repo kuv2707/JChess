@@ -1,4 +1,3 @@
-import java.io.*;
 class FileHandler
 {
     final static String not_end="nn",yes_end="yy";

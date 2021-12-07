@@ -2,7 +2,6 @@
  import javax.swing.*;
  import java.awt.geom.*;
  import java.awt.event.*;
- import java.util.*;
 class modalYesNo extends JDialog
 {
     public static int YES=1,NO=0;

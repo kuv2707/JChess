@@ -77,7 +77,6 @@ class pawn extends goti
     }
     public String promotionCheck()// finally returns type of goti chosen to revive and its color
     {
-        Point showloc=this.guiloc;
         int y=this.getLocation().y;
         String got="";
 
@@ -112,7 +111,6 @@ class pawn extends goti
         Point currL=this.getLocation();
         int x=(int)currL.getX();
         int y=(int)currL.getY();
-        int counter=0;
         ArrayList<Point> l=new ArrayList<Point>();
         if(this.teamCol.equals(goti.colWhit))
         {

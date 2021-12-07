@@ -1,4 +1,3 @@
-import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
 /**
@@ -62,7 +61,7 @@ class Temporizador
     public String getUCITime()
     {
         String s=null;
-        if(team.equals(goti.colWhit))
+        if(team.getColor().equals(goti.colWhit))
         s="wtime ";
         else
         s="btime ";

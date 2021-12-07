@@ -1,6 +1,3 @@
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
 import java.awt.*;
 class Shockwave implements Runnable
 {
@@ -22,7 +19,7 @@ class Shockwave implements Runnable
     {
         circlx=x;
         circly=y;
-        shockwavecolor=game.nowturnof.equals(goti.colWhit)?black:white;
+        shockwavecolor=game.nowturnof.getColor().equals(goti.colWhit)?black:white;
         double spd=6;
         while(circlr<650)
         {

@@ -8,12 +8,12 @@ import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.util.concurrent.*;
 import java.io.*;
-import javax.swing.UIManager.*;
+//import javax.swing.UIManager.*;
 
 class gui implements MouseListener,MouseMotionListener 
 {
     static JFrame frame;
-    static JPanel pan,controlhost;
+    JPanel pan,controlhost;
     static Settings config;
     static int natDragX,natDragY;
     static final int scalefactor=80;
@@ -353,7 +353,8 @@ class gui implements MouseListener,MouseMotionListener
         controlhost.add(hereturn);
         controlhost.add(bt);
         controlhost.add(sla);
-        if(game.getHerePlayer() instanceof Online  &&  false)//under construction
+        /**
+        if(game.getHerePlayer() instanceof Online )//under construction
         {
             try
             {
@@ -392,7 +393,7 @@ class gui implements MouseListener,MouseMotionListener
             }
             
         }
-
+        */
         
         
 
@@ -442,7 +443,6 @@ class gui implements MouseListener,MouseMotionListener
         
         
     }
-    static ArrayList<Player> dontShowPossLocFor=new ArrayList();
     public void initThreads()
     {
         
@@ -473,12 +473,6 @@ class gui implements MouseListener,MouseMotionListener
                 
             }
         });
-                
-           
-        if(!(game.getHerePlayer() instanceof SavedGameReader))
-        {
-            dontShowPossLocFor.add(game.getOppositePlayer());
-        }
         
         
         
@@ -489,31 +483,28 @@ class gui implements MouseListener,MouseMotionListener
          //urge the online players to accept move inputs from sockets and play
            
         
-        gameEvents.execute(new addmou());
+        gameEvents.execute(new Runnable() {
+            public void run()
+            {
+                addmouselisteners();
+            }
+        });
         gameActions=este;
         deadManager.initlox();
         
         Environment.setDarkMode(true);
     }
-    static class addmou implements Runnable
+    public void addmouselisteners()
     {
-        public void run()
-        {
-            addmouselisteners();
-        }
+        game.getChessBoard().pan.addMouseListener(gameActions);
+        game.getChessBoard().pan.addMouseMotionListener((MouseMotionListener)gameActions);
+         
     }
-    public static void addmouselisteners()
+    public void removemouselisteners()
     {
-        pan.addMouseListener(gameActions);
-            pan.addMouseMotionListener((MouseMotionListener)gameActions);
-            
-            //gui.updatelabels();
-    }
-    public static void removemouselisteners()
-    {
-        pan.removeMouseListener(gameActions);
-            pan.removeMouseMotionListener((MouseMotionListener)gameActions);
-            //gui.updatelabels();
+        game.getChessBoard().pan.removeMouseListener(gameActions);
+        game.getChessBoard().pan.removeMouseMotionListener((MouseMotionListener)gameActions);
+        
     }
     static Point prev=null;
     
@@ -629,7 +620,7 @@ class gui implements MouseListener,MouseMotionListener
                 chaal.guiloc.x=x-natDragX;
                 chaal.guiloc.y=y-natDragY;
 
-                hold.repaint();
+                refresh();
     }
             Point chaalPrevLoc;
             static Point snapshotstart=null;
@@ -726,9 +717,9 @@ class gui implements MouseListener,MouseMotionListener
                 }
                 Point land=gui.guidelegate(new Point(x,y),false);
                 pan.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-               selcol=null;
-                    chaalPrevLoc=null;
-             String send="";   
+                selcol=null;
+                chaalPrevLoc=null;
+               
             if(chaal!=null )
             {
                  chaal.getRendering().releasedByUser();
@@ -782,12 +773,11 @@ class gui implements MouseListener,MouseMotionListener
                     if(did.castlecontent!=null)
                     {
                         goti g=(goti)did.castlecontent[0];//the rook to be displaced due to castling
-                        Point p=(Point)did.castlecontent[1];//old location of that rook: no longer required
                         g.getRendering().transit(guidelegate(g.getLocation(),true),360);
                         audio.play("castle");
                     }
-                    send=did.netSend();
-                   highlight.fadeAway();
+                    
+                    highlight.fadeAway();
                         
                     chaal=null;
                     
@@ -826,10 +816,6 @@ class gui implements MouseListener,MouseMotionListener
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-            
-            int x=pan.getWidth();
-            int y=pan.getHeight();
-        
             
            
              boolean black=true;
@@ -902,7 +888,7 @@ class gui implements MouseListener,MouseMotionListener
               //highlight.show();
                 try
                 {
-                for(Map.Entry m : highlight.entrySet())//what syntax is involved here?
+                for(Map.Entry<Point,Color> m : highlight.entrySet())//what syntax is involved here?
                 {
                     //if(gui.dontShowPossLocFor.contains(game.nowturnof))
                     //break;
@@ -947,7 +933,7 @@ class gui implements MouseListener,MouseMotionListener
                 
                 plot.getRendering().render(g);
                 
-                if((plot.guiloc.x>=0&&plot.guiloc.x<=pan.getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=pan.getHeight()) &&  plot.statOfAct ) 
+                if((plot.guiloc.x>=0&&plot.guiloc.x<=getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=getHeight()) &&  plot.statOfAct ) 
                 {
                     try
                     {
@@ -1026,20 +1012,13 @@ class gui implements MouseListener,MouseMotionListener
                 continue;
                 try
                 {
-                      if(!((plot.guiloc.x>=0&&plot.guiloc.x<=pan.getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=pan.getHeight()) ) &&  !plot.statOfAct )
+                    if(!((plot.guiloc.x>=0&&plot.guiloc.x<=game.getChessBoard().pan.getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=game.getChessBoard().pan.getHeight()) ) &&  !plot.statOfAct )
+                    plot.getRendering().render(g);
+                }
+                catch(Exception e)
                 {
-                      plot.getRendering().render(g);
-                    
-                    
+                    System.out.println(e+" "+plot.tipo);
                 }
-                      
-                    
-                    
-                }
-                    catch(Exception e)
-                      {
-                          System.out.println(e+" "+plot.tipo);
-                      }
                     
             }
          
@@ -1053,52 +1032,11 @@ class gui implements MouseListener,MouseMotionListener
         
         }
     }
-    private static int ggg=440;
+    
     static int a=0,b=0;
-    //APPARATUS TO SEND CURRENT USER ACTION TO SOCKET
-    //TO BE DONE BY RESPECTIVE PLAYER OBJECTS
-    /*
-    public static void mousepressed(Point p,JComponent source)
-    {
-        Object[] mo;
-        if(networkhr.role==1)
-        mo=new Object[]{p,networkhr.select,null};
-        else
-        mo=new Object[]{p,networkhr.select,null};
-        
-        if(source instanceof JButton ==true )
-        return;
-        Runnable r=new networkhr.send(mo,networkhr.role);
-        pool.execute(r);
-    }
-    public static void mousedragged(Point p,JComponent source)
-    {
-        Object[] mo;
-        if(networkhr.role==1)
-        mo=new Object[]{p,networkhr.drag,null};
-        else
-        mo=new Object[]{p,networkhr.drag,null};
-        
-        if(source instanceof JButton ==true )
-        return;
-        Runnable r=new networkhr.send(mo,networkhr.role);
-        pool.execute(r);
-    }
-    public static void mousereleased(Point p,String s,JComponent source)//s is for revival type
-    {
-        Object[] mo;
-        if(networkhr.role==1)
-        mo=new Object[]{p,networkhr.put,s};
-        else
-        mo=new Object[]{p,networkhr.put,s};
-        
-        if(source instanceof JButton ==true )
-        return;
-        Runnable r=new networkhr.send(mo,networkhr.role);
-        pool.execute(r);
-    }
+    
 
-     */
+    
     //true means logical board to gui coord conv
     //false means gui to logical board
     public static Point guidelegate(Point p,boolean convway)//takes in point and whether to convert it to board coordinates or vice versa , and does that
@@ -1201,6 +1139,6 @@ class gui implements MouseListener,MouseMotionListener
     public static boolean isInBounds(int x,int y)
     {
         
-        return (  (x>0&&x<pan.getWidth() && y>0&&y<pan.getHeight()));
+        return (  (x>0&&x<game.getChessBoard().pan.getWidth() && y>0&&y<game.getChessBoard().pan.getHeight()));
     }
 }
