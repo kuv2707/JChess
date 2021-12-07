@@ -34,13 +34,13 @@ class Settings extends JPanel
                     
                      if(change.getSelectedItem().toString().equals(set[4]))
                      {
-                         shockwave.white=shockwave.white2;
-                         shockwave.black=shockwave.black2;
+                         Shockwave.white=Shockwave.white2;
+                         Shockwave.black=Shockwave.black2;
                      }
                      else
                      {
-                         shockwave.white=shockwave.white1;
-                         shockwave.black=shockwave.black1;
+                         Shockwave.white=Shockwave.white1;
+                         Shockwave.black=Shockwave.black1;
                      }
                          new Thread(new Runnable()
                          {

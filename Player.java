@@ -32,7 +32,7 @@ abstract class Player extends JComponent//for easy use in gui events
         
         time=new Temporizador(this);
         lab=new nameLabel("",JLabel.CENTER,this);
-        lab.updateName();
+        //lab.updateName();
         lab.setToolTipText(getTeamName());
         lab.setFont(CONSTANTS.windowfont);
         game.onGameEnd(new Task()
@@ -40,6 +40,13 @@ abstract class Player extends JComponent//for easy use in gui events
             public void perform()
             {
                 lab.deHighlightName();
+            }
+        });
+        game.onGameStart(new Task()
+        {
+            public void perform()
+            {
+                lab.updateName();
             }
         });
         lab.setOpaque(false);
@@ -134,25 +141,8 @@ abstract class Player extends JComponent//for easy use in gui events
     {
         return lab;
     }
-    public String getRevivalCandidate()
-    {
-        /**
-         * all subclass override this method to return the variable revival
-         * only human player will do the below thing
-         *
-         */
-        Image goties[]=null;
-        if(this.team.equals(goti.colWhit))
-        {
-            goties=new Image[]{game.whitQueen,game.whitRook,game.whitNait,game.whitBishop};
-        }
-        else
-        {
-            goties=new Image[]{game.blakQueen,game.blakRook,game.blakNait,game.blakBishop};
-        }
-        Promotion dialog=new Promotion(gui.frame,goties,MouseInfo.getPointerInfo().getLocation());//dialog appears where mouse pointer is
-        return dialog.run();
-    }
+    abstract public String getRevivalCandidate();
+    
     public void setName(String s)
     {
         Environment.log(toString()+" ka name changed to "+s);

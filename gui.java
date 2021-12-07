@@ -22,7 +22,7 @@ class gui implements MouseListener,MouseMotionListener
     static MouseListener gameActions;
     static goti chaal;
     static PossibLox<Point,Color> highlight;
-    static ExecutorService pool,seq,shockwavequeue,transition,smoooth;
+    static ExecutorService turnChange,shockwave,gameEvents,highlighterTransit;
     
     
     
@@ -397,12 +397,12 @@ class gui implements MouseListener,MouseMotionListener
         
 
         hold.add(boardPic,(Integer)1);
-        hold.add(pan,(Integer)5);
+        hold.add(pan,(Integer)3);
         hold.add(controlhost,(Integer)2);
         
         
         cover=new flash();
-        hold.add(cover,8);
+        hold.add(cover,(Integer)4);
         
         frame.add(hold);
         frame.setIconImage(game.icon);
@@ -447,13 +447,13 @@ class gui implements MouseListener,MouseMotionListener
     {
         
         //actual game things
-        pool=Executors.newFixedThreadPool(1);
-        transition=Executors.newFixedThreadPool(1);
-        seq=Executors.newFixedThreadPool(1);
-        shockwavequeue=Executors.newFixedThreadPool(1);
-        smoooth=Executors.newFixedThreadPool(1);
-        seq.execute(new utility.fadein(frame));
-        seq.execute(new Runnable()
+        
+        turnChange=Executors.newFixedThreadPool(1);
+        gameEvents=Executors.newFixedThreadPool(1);
+        shockwave=Executors.newFixedThreadPool(1);
+        highlighterTransit=Executors.newFixedThreadPool(1);
+        gameEvents.execute(new utility.fadein(frame));
+        gameEvents.execute(new Runnable()
         {
             public void run()
             {
@@ -483,13 +483,13 @@ class gui implements MouseListener,MouseMotionListener
         
         
         
-        seq.execute(new MessageAnimator(MessageAnimator.starts,true));
+        gameEvents.execute(new MessageAnimator(MessageAnimator.starts,true));
         
         
          //urge the online players to accept move inputs from sockets and play
            
         
-        seq.execute(new addmou());
+        gameEvents.execute(new addmou());
         gameActions=este;
         deadManager.initlox();
         
@@ -576,7 +576,7 @@ class gui implements MouseListener,MouseMotionListener
                 if(!p.equals(selcol))
                 {
                     if(Smooth.inprogress==false)
-                    smoooth.execute(new Smooth(selcol,p));
+                    highlighterTransit.execute(new Smooth(selcol,p));
                     
                 }
             }
@@ -739,7 +739,7 @@ class gui implements MouseListener,MouseMotionListener
                    goti k;
                    if( (k=did.whomKilled())!=null)
                    {
-                        shockwavequeue.execute(new shockwave(x,y));
+                        shockwave.execute(new Shockwave(x,y));
                         audio.play("capture");
                         k.getRendering().transit(Controls.offset(deadManager.getFreeLocation(k)),180);
                         
@@ -765,18 +765,19 @@ class gui implements MouseListener,MouseMotionListener
                         lastmovealgebraic=did.getAlgebra();
                         if(chaal.teamCol.equals(goti.colBlak))
                         {
-                            lastmovealgebraic.replace(goti.ghora,"♞");
-                            lastmovealgebraic.replace(goti.rani,"♛");
-                            lastmovealgebraic.replace(goti.mandir,"♝");
-                            lastmovealgebraic.replace(goti.hathi,"♜");
+                            //dark gotis are unmappable,WHY?
+                            //lastmovealgebraic.replace(goti.ghora,"");
+                            //lastmovealgebraic.replace(goti.rani,"");
+                            //lastmovealgebraic.replace(goti.mandir,"");
+                            //lastmovealgebraic.replace(goti.hathi,"");
                         }
-                        new goti.turnmanager(true).start();
+                        turnChange.execute(game.successfulTurn);
                     }
                     else
                     {
                         chaal.getRendering().transit(gui.guidelegate(new Point(did.getPrevBoardLoc().x,did.getPrevBoardLoc().y),true),360);
                         audio.play("invalid");
-                        new goti.turnmanager(false).start();
+                        turnChange.execute(game.unsuccessfulTurn);
                     }
                     if(did.castlecontent!=null)
                     {
@@ -943,15 +944,14 @@ class gui implements MouseListener,MouseMotionListener
                 goti plot=game.pisse.get(i);
                 if(plot.equals(chaal))
                 continue;
-                if(plot.isInUse())
-                continue;
                 
+                plot.getRendering().render(g);
                 
                 if((plot.guiloc.x>=0&&plot.guiloc.x<=pan.getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=pan.getHeight()) &&  plot.statOfAct ) 
                 {
                     try
                     {
-                        plot.getRendering().render(g);
+                        
                     }
                     catch(Exception e)
                     {
@@ -962,16 +962,7 @@ class gui implements MouseListener,MouseMotionListener
             }
             if(chaal!=null)
             chaal.getRendering().render(g);//drawn later so that it is shown above all
-            for(int i=0;i<game.pisse.size();i++)
-            {
-                goti plot=game.pisse.get(i);
-                if(plot.equals(chaal))
-                continue;
-                if(!plot.isInUse())
-                continue;
-                plot.getRendering().render(g);
-                
-            }
+            
             
             //drawing game board done
          
@@ -979,7 +970,7 @@ class gui implements MouseListener,MouseMotionListener
         MessageAnimator.drawContent(g);
         
                 // draw shockwave
-        shockwave.render(g);
+        Shockwave.render(g);
            
       }
       
@@ -1148,7 +1139,7 @@ class gui implements MouseListener,MouseMotionListener
         {
             for(Runnable r: l)
             {
-                gui.seq.execute(r);
+                gui.gameEvents.execute(r);
             }
         }
     }
@@ -1179,7 +1170,7 @@ class gui implements MouseListener,MouseMotionListener
         public boardPicture()
         {
             super();
-            if(game.getHerePlayer().equals(goti.colWhit))
+            if(game.getHerePlayer().getColor().equals(goti.colWhit))
             {
                 x=-25;
                 y=-25;

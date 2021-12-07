@@ -7,27 +7,27 @@ class flash extends JPanel
     
     public void screenshot()
     {
-        System.out.println("fds");
-        for(fla=0;fla<150;fla+=0.5)
+        Environment.log("flashing");
+        for(fla=0;fla<150;fla+=2)
         {
             flashcol=new Color(213, 216, 231,(int)fla);
-            //repaint();
+            repaint();
             try
             {
-                Thread.sleep(1);
+                Thread.sleep(10);
             }
             catch (InterruptedException ie)
             {
                 ie.printStackTrace();
             }
         }
-        for(fla=150;fla>0;fla-=0.5)
+        for(fla=150;fla>0;fla-=2)
         {
             flashcol=new Color(213, 216, 231,(int)fla);
-            //repaint();
+            repaint();
             try
             {
-                Thread.sleep(1);
+                Thread.sleep(15);
             }
             catch (InterruptedException ie)
             {

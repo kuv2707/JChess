@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MessageAnimator
-comment1.params=s\ b
+comment1.params=s\ fade
 comment1.target=MessageAnimator(java.lang.String,\ boolean)
 comment2.params=
 comment2.target=void\ run()

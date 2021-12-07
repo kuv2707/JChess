@@ -2,6 +2,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+
+
+
 import java.util.concurrent.*;
 class game implements Runnable
 {
@@ -125,7 +128,8 @@ class game implements Runnable
     {
         return gg;
     }
-    
+    static goti.turnmanager successfulTurn=new goti.turnmanager(true);
+    static goti.turnmanager unsuccessfulTurn=new goti.turnmanager(false);
     static boolean ai;
     public static void endGame(String endMessage,String onGUI)
     {
@@ -139,7 +143,7 @@ class game implements Runnable
         //thatPlayer.lab.deHighlightName();
         //if(game.mode==game.mode_online)
         //gui.pool.execute(new networkhr.send("Timeout",networkhr.role));
-        new Thread(new MessageAnimator(endMessage,false)).start();
+        gui.gameEvents.execute(new MessageAnimator(endMessage,false));
         game.setGameEnd();
         
         
@@ -165,8 +169,8 @@ class game implements Runnable
         
         gg.initThreads();
         for(Task t:startTasks)
-        new Thread(t).start();
-        gui.seq.execute(new goti.turnmanager(true));
+        gui.gameEvents.execute(t);
+        gui.turnChange.execute(successfulTurn);
         
     }
     public static boolean isGameActive()
@@ -178,48 +182,8 @@ class game implements Runnable
         //assert(isGameActive==true);
         isGameActive=false;
         for(Task t:endTasks)
-        new Thread(t).start();
+        gui.gameEvents.execute(t);
         
-        //not performing it as no point:
-        new Thread(new Runnable()
-        {
-            public void run()
-            {
-                float r=colortrans.b;
-                float g=colortrans.r;
-                float b=colortrans.g;
-                float alfa=200;
-                for(float k=0;k<=1;k+=0.008)
-                {
-                    try
-                    {
-                        Thread.sleep(5);
-                    }
-                    catch (InterruptedException ie)
-                    {
-                        ie.printStackTrace();
-                    }
-                    int finR,finG,finB;
-                    if(Environment.isDarkMode())
-                    {
-                        finR=0;
-                        finG=0;
-                        finB=0;
-                    }
-                    else
-                    {
-                        finR=215;
-                        finG=214;
-                        finB=229;
-                    }
-                    r=colortrans.b+(finR-colortrans.b)*k;
-                    g=colortrans.r+(finG-colortrans.r)*k;
-                    b=colortrans.g+(finB-colortrans.g)*k;
-                    alfa=80+(200-80)*k;
-                    Environment.controlBackground=new Color((int)r,(int)g,(int)b,(int)alfa);
-                }
-            }
-        });
     }
     public static void loadimages(String folder)throws Exception
     {

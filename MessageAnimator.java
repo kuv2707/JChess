@@ -13,11 +13,11 @@ class MessageAnimator implements Runnable
     static Font font=new Font("LEPIFONT",Font.PLAIN,0);
     final static int maxWidth=gui.scalefactor*8;
     boolean vanish=true;
-    public MessageAnimator(String s,boolean b)
+    public MessageAnimator(String s,boolean fade)
     {
         greet=s;
         instr=s;
-        vanish=b;
+        vanish=fade;
     }
     /*
      * squareX,squareY,squareWidth,squareHeight,fontSize,Opacity

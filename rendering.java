@@ -1,6 +1,8 @@
 import java.awt.event.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.awt.geom.AffineTransform;
 class rendering
 {
@@ -8,6 +10,7 @@ class rendering
     double angle=0,paramangle;
     Point start,end;
     double scaling=1;
+    ExecutorService animator=Executors.newFixedThreadPool(1);
     public rendering(goti g,Point p)
     {
         this.master=g;
@@ -41,13 +44,13 @@ class rendering
     public void selectedByUser()
     {
         
-        new Thread(new Runnable()
+        animator.execute(new Runnable()
         {
             public void run()
             {
                 scale(true);
             }
-        }).start();
+        });
     }
     public synchronized void scale(boolean b)
     {
@@ -84,15 +87,14 @@ class rendering
     }
     public void releasedByUser()
     {
-        new Thread(new Runnable()
+        animator.execute(new Runnable()
         {
             public void run()
             {
                 scale(false);
             }
-        }).start();
+        });
     }
-    private ArrayList<Runnable> l=new ArrayList<>();
     public void transit(Point end, double angleby)
     {
         rendering ref=this;
@@ -110,8 +112,8 @@ class rendering
                 ref.move(start,end,ref.angle+ss,this);
             }
         };
-        l.add(cr);
-        new Thread(cr).start();
+        
+        animator.execute(cr);
     }
     public synchronized void move(Point start,Point end,double rotate,Runnable este)//adapt it for many scenarios of goti's location
     {
@@ -119,18 +121,7 @@ class rendering
         double k=0;
        int lim=50,pause=10;
         goti m=master;
-        while(m.isInUse())
-        {
-            try
-            {
-                Thread.sleep(15);
-            }
-            catch (InterruptedException ie)
-            {
-                ie.printStackTrace();
-            }
-        }
-        m.markUsing();
+       
         double s=Math.sqrt(Math.pow(end.x-start.x,2)+Math.pow(end.y-start.y,2));
         if(s<=100 )
         {
@@ -182,7 +173,7 @@ class rendering
                                             
         }
         
-        m.unmarkUsing();                               
+                                     
     }
     
     

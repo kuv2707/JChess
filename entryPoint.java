@@ -34,10 +34,15 @@ class entryPoint implements Runnable
         }
       }
       //these throw exception when game hasnt started and tried to exit
-      game.getHerePlayer().destroy();
-      game.getOppositePlayer().destroy();
-      gui.removemouselisteners();
       FileHandler.exitTask();
+      if(game.getHerePlayer()!=null)
+      game.getHerePlayer().destroy();
+      if(game.getOppositePlayer()!=null)
+      game.getOppositePlayer().destroy();
+      if(game.getChessBoard()!=null)
+      game.getChessBoard().removemouselisteners();
+      
+      Environment.log("almost about to end");
       Thread t=new utility.fadeout(gui.frame,true,true);
       t.start();
     }

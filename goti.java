@@ -8,11 +8,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
-import java.io.*;
 import java.util.concurrent.*;
-abstract class goti implements Serializable
+abstract class goti
 {
-    //name values can be thought of as their size or importance 
     static final String ghora="♘";
     static final  String hathi="♖";
     static final  String pyada="♙";
@@ -22,10 +20,6 @@ abstract class goti implements Serializable
     static final  Color colWhit=new Color(255,255,255);
     static final  Color colBlak=new Color(0,0,0);
     static final  Color nullcol=new Color(0,0,0,0);
-    static enum variables
-    {
-        attribute_minor,attribute_major;
-    }
     static CopyOnWriteArrayList<goti> subject;
     static char whitecastlableK='K',whitecastlableQ='Q',blackcastlablek='k',blackcastlableq='q';
     static int halfmovecount=0;
@@ -35,7 +29,7 @@ abstract class goti implements Serializable
     int value;
     String tipo,attribute;
     boolean statOfAct;    //true=alive   false=dead
-    boolean guiuse;
+    
     Image face;
     Point size;
     char FENvalue;
@@ -54,7 +48,7 @@ abstract class goti implements Serializable
         this.guiloc=(Point)g.guiloc.clone();
         this.face=g.face;
         this.size=g.size;
-        this.guiuse=false;
+        
     }
     public goti(String typeG,Point ubi,Color teamCol)
     {
@@ -63,7 +57,6 @@ abstract class goti implements Serializable
         this.setTipo(typeG);
         this.teamCol=teamCol;
         this.statOfAct=true;
-        this.guiuse=false;
         this.size=new Point(gui.scalefactor,gui.scalefactor);
         this.setFace();
     }
@@ -354,9 +347,7 @@ abstract class goti implements Serializable
     
     static int outX=8,outY=0;
     static int out2X=8,out2Y=2;
-    private int enpturn;
-    private Point enploc;
-    private goti enpas;
+    
     public void killed(goti by)
     {
         if(this.tipo.equals(goti.raja)==true)
@@ -431,19 +422,7 @@ abstract class goti implements Serializable
         game.chessBoard[getLocation().x][getLocation().y]=null;
         this.location=fsd;
     }
-    public void markUsing()
-    {
-        guiuse=true;
-        
-    }
-    public void unmarkUsing()
-    {
-        guiuse=false;
-    }
-    public boolean isInUse()
-    {
-        return guiuse;
-    }
+    
     public static boolean isInLimits(Point f)
     {
         return (f.getX()<=7&&f.getX()>=0&&f.getY()<=7&&f.getY()>=0);
@@ -484,7 +463,7 @@ abstract class goti implements Serializable
         steps.makeAlgebraicNotation();
         recordmove(steps);
     }
-    static class turnmanager extends Thread implements Runnable
+    static class turnmanager implements Runnable
     {
         boolean valid;
         public turnmanager(boolean b)
@@ -692,26 +671,6 @@ abstract class goti implements Serializable
         
     }
     
-    public static CopyOnWriteArrayList<goti> copyBoard(CopyOnWriteArrayList<goti> g)
-    {
-        CopyOnWriteArrayList<goti> ret=new CopyOnWriteArrayList<goti>();
-        for(int i=0;i<g.size();i++)
-        {
-            if(g.get(i) instanceof pawn)
-            ret.add(new pawn(g.get(i)));
-            if(g.get(i) instanceof rook)
-            ret.add(new rook(g.get(i)));
-            if(g.get(i) instanceof knight)
-            ret.add(new knight(g.get(i)));
-            if(g.get(i) instanceof bishop)
-            ret.add(new bishop(g.get(i)));
-            if(g.get(i) instanceof queen)
-            ret.add(new queen(g.get(i)));
-            if(g.get(i) instanceof king)
-            ret.add(new king(g.get(i)));
-        }
-        return ret;
-    }
     public ArrayList<Point> getSlantLocations(ArrayList<Point> l)
     {
         Point currL=this.getLocation();

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.geom.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.concurrent.*;
 public class utility
 {
     static class fadein implements Runnable
@@ -207,6 +208,7 @@ public class utility
         Color foregroundColor;
         Color backupback,backupfore;
         Color background;
+        ExecutorService animator=Executors.newFixedThreadPool(1);
         //=new Color(colortrans.g,colortrans.b,colortrans.r,alfa);
         volatile int alfa=70;
         Point epicenter=null;
@@ -227,7 +229,7 @@ public class utility
                     epicenter=new Point(me.getX(),me.getY());
                     
                     background=new Color(background.getRed(), background.getGreen(), background.getBlue());//as its alpha was 0
-                    new Thread(new Runnable()
+                    animator.execute(new Runnable()
                     {
                         public void run()
                         {
@@ -245,11 +247,11 @@ public class utility
                                 
                             }
                         }
-                    }).start();
+                    });
                 }
                 public void mouseReleased(MouseEvent me)
                 {
-                    new Thread(new Runnable()
+                    animator.execute(new Runnable()
                     {
                         public void run()
                         {
@@ -270,7 +272,7 @@ public class utility
                             radius=1;
                             repaint();
                         }
-                    }).start();
+                    });
                     
                 }
             });

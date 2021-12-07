@@ -18,7 +18,7 @@ class AI extends Player
     public void playMove()
     {
         game.getOpponentOf(this).endMove();
-        gui.seq.execute(Turn);
+        gui.gameEvents.execute(Turn);
     }
     public AI(Color c,int difficulty)
     {

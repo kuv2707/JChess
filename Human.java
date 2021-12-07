@@ -3,18 +3,60 @@ import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 
 import java.awt.event.*;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 class Human extends Player
 {
     ObjectOutputStream peer_send ;
+    Socket peer;
     public Human(Color c, String s)
     {
         super(c,s);
     }
     public void destroy()
     {
-        //no such thing to destroy here
+        
+        if(peer!=null)
+            try {
+                peer_send.close();
+                peer.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+    }
+    @Override
+    public String getRevivalCandidate()
+    {
+        {
+            /**
+             * all subclass override this method to return the variable revival
+             * only human player will do the below thing
+             *
+             */
+            Image goties[]=null;
+            if(this.team.equals(goti.colWhit))
+            {
+                goties=new Image[]{game.whitQueen,game.whitRook,game.whitNait,game.whitBishop};
+            }
+            else
+            {
+                goties=new Image[]{game.blakQueen,game.blakRook,game.blakNait,game.blakBishop};
+            }
+            Promotion dialog=new Promotion(gui.frame,goties,MouseInfo.getPointerInfo().getLocation());//dialog appears where mouse pointer is
+            String resp=dialog.run();
+            try
+            {
+                peer_send.writeObject("revv:"+resp);
+                peer_send.flush();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            return resp;
+        }
     }
     MouseAdapter ma=new MouseAdapter() {
         public void mousePressed(MouseEvent e)
@@ -26,14 +68,14 @@ class Human extends Player
                     {
                         try
                         {
-                            ObjectOutputStream o=peer_send;
-                            o.writeObject(new Object[]
+                            
+                            peer_send.writeObject(new Object[]
                             {
-                                new Point(e.getX(),e.getY()),
-                                Networks.select,
-                                null
+                                e.getX(),e.getY(),
+                                Networks.select
+                               
                             });
-                            o.flush();
+                            peer_send.flush();
                         }
                         catch(Exception e)
                         {
@@ -53,14 +95,13 @@ class Human extends Player
                     {
                         try
                         {
-                            ObjectOutputStream o=peer_send;
-                            o.writeObject(new Object[]
+                            peer_send.writeObject(new Object[]
                             {
-                                new Point(me.getX(),me.getY()),
-                                Networks.drag,
-                                null
+                                me.getX(),me.getY(),
+                                Networks.drag
+                                
                             });
-                            o.flush();
+                            peer_send.flush();
                         }
                         catch(Exception e)
                         {
@@ -79,14 +120,13 @@ class Human extends Player
                     {
                         try
                         {
-                            ObjectOutputStream o=peer_send;
-                            o.writeObject(new Object[]
+                            peer_send.writeObject(new Object[]
                             {
-                                new Point(me.getX(),me.getY()),
-                                Networks.put,
-                                null
+                                me.getX(),me.getY(),
+                                Networks.put
+                                
                             });
-                            o.flush();
+                            peer_send.flush();
                         }
                         catch(Exception e)
                         {

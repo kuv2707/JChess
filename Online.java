@@ -169,7 +169,7 @@ public class Online extends Player
                                     player.doHandShakeWith(tf.getText(),1111);
                                     Thread gt=new utility.fadeout(container,false,false);
                                     gt.start();
-                                    new game(new Player[]{host,player},new Object[]{0,grab.getModel().isSelected()});
+                                    new game(new Player[]{player,host},new Object[]{0,grab.getModel().isSelected()});
 
 
                                     

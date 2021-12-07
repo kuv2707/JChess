@@ -2,7 +2,7 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-class shockwave implements Runnable
+class Shockwave implements Runnable
 {
     int x,y,r;
     static int circlx, circly,circlr;
@@ -12,7 +12,7 @@ class shockwave implements Runnable
     static Color white2=Color.WHITE;
     static Color black2=Color.BLACK;
     static Color white=white1,black=black1;
-    public shockwave(int x, int y)
+    public Shockwave(int x, int y)
     {
         this.x=x;
         this.y=y;
