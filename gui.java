@@ -57,15 +57,7 @@ class gui implements MouseListener,MouseMotionListener
     static JToggleButton bt;
     
     
-    public void initGuiLoc()
-    {
-        for(int i=0;i<game.pisse.size();i++)
-            {
-                goti tem=game.pisse.get(i);
-                
-                tem.associate(new rendering(tem,new Point(660,660)));
-            }
-    }
+    
     public void makeFrame()
     {
         
@@ -77,7 +69,7 @@ class gui implements MouseListener,MouseMotionListener
             } 
             catch (IOException|FontFormatException e) {
                  //Handle exception
-                 Environment.log("font failed "+e);
+                 Environment.log("LEPIFONT failed "+e);
                  
             }
         
@@ -132,7 +124,7 @@ class gui implements MouseListener,MouseMotionListener
         close.setBounds(186+186,0,190,120);
         close.setTactileColor(new Color(240,23,45,220));
         
-         minimize=new utility.rgbButton("Minimize ");
+        minimize=new utility.rgbButton("Minimize ");
         minimize.setForeground(new Color(190, 114, 237));
         minimize.setTactileColor(new Color(190, 114, 237));
         minimize.setBounds(186,0,186,120);
@@ -164,12 +156,8 @@ class gui implements MouseListener,MouseMotionListener
         
         thereturn=game.getOppositePlayer().getGUIRepresentation();
         thereturn.setBounds(290,160,250,80);
-        
-        
         hereturn=game.getHerePlayer().getGUIRepresentation();
         hereturn.setBounds(20,160,250,80);
-        
-        
         
         
         
@@ -182,9 +170,6 @@ class gui implements MouseListener,MouseMotionListener
         scrsh.setOpaque(false);
         scrsh.setFont(new Font("LEIPFONT",Font.PLAIN,45));
         scrsh.setBounds(0,260,100,70);
-        
-        
-
         
         
         
@@ -249,9 +234,6 @@ class gui implements MouseListener,MouseMotionListener
                             gui.cover.screenshot();
                         }
                     }).start();
-                            
-                    
-
                 }
                 if(me.getSource()==drag)
                 {
@@ -279,8 +261,6 @@ class gui implements MouseListener,MouseMotionListener
             public void mouseEntered(MouseEvent me)
             {
                 selcol=null;
-                
-                
                 if(me.getSource()==close)
                 {
                     close.setBackground(Color.red);
@@ -302,7 +282,6 @@ class gui implements MouseListener,MouseMotionListener
                 {
                     close.setBackground(new JButton().getBackground());
                 }
-                
                 if(me.getSource()==minimize)
                 {
                     minimize.setBackground(new JButton().getBackground());
@@ -313,7 +292,6 @@ class gui implements MouseListener,MouseMotionListener
                 }
             }
         };
-        
         minimize.addMouseListener(new MouseAdapter()
         {
             public void mouseClicked(MouseEvent me)
@@ -335,14 +313,11 @@ class gui implements MouseListener,MouseMotionListener
                         }
                     }
                     frame.setState(JFrame.ICONIFIED);
-                    
-                
             }
         });
         close.addMouseListener(windowbuttons);
         minimize.addMouseListener(windowbuttons);
         drag.addMouseListener(windowbuttons);
-            
         drag.addMouseMotionListener(windowbuttons);
         scrsh.addMouseListener(windowbuttons);
         controlhost.add(drag);
@@ -408,9 +383,6 @@ class gui implements MouseListener,MouseMotionListener
         frame.add(hold);
         frame.setIconImage(game.icon);
         
-        
-        
-        
         KeyListener exit=new KeyAdapter()
         {
             public void keyPressed(KeyEvent ke)
@@ -426,28 +398,16 @@ class gui implements MouseListener,MouseMotionListener
                         e.printStackTrace();
                     }
                 }
-                
-                
             }
         };
         
-             
-        
-        
         controlhost.addKeyListener(exit);
         pan.addKeyListener(exit);//maybe substitute with key bindings
-        
         pan.setFocusable(true);
-        //frame.setOpacity(0);
         frame.setVisible(true);
-        
-        
     }
     public void initThreads()
     {
-        
-        //actual game things
-        
         turnChange=Executors.newFixedThreadPool(1);
         gameEvents=Executors.newFixedThreadPool(1);
         shockwave=Executors.newFixedThreadPool(1);
@@ -470,20 +430,14 @@ class gui implements MouseListener,MouseMotionListener
                         ie.printStackTrace();
                     }
                 }
-                
             }
         });
-        
-        
-        
-        
         gameEvents.execute(new MessageAnimator(MessageAnimator.starts,true));
         
+        //urge the online players to accept move inputs from sockets and play
         
-         //urge the online players to accept move inputs from sockets and play
-           
-        
-        gameEvents.execute(new Runnable() {
+        gameEvents.execute(new Runnable()
+        {
             public void run()
             {
                 addmouselisteners();
@@ -491,7 +445,6 @@ class gui implements MouseListener,MouseMotionListener
         });
         gameActions=este;
         deadManager.initlox();
-        
         Environment.setDarkMode(true);
     }
     public void addmouselisteners()
@@ -526,14 +479,13 @@ class gui implements MouseListener,MouseMotionListener
             while(k<=1)
             {
                 selcol=new Point( (int)(k*(end.x-start.x)+start.x),(int)(k*(end.y-start.y)+start.y));
-                //selcol=new Point(  (int)((k*end.x+start.x)/(k+1)),(int)((k*end.y+start.y)/(k+1)));
-                k+=0.025;
+                k+=0.125;
                 gui.hold.repaint();
                 try
                 {
-                    Thread.sleep(1);
+                    Thread.sleep(5);
                 }
-                catch (InterruptedException ie)
+                catch(InterruptedException ie)
                 {
                     ie.printStackTrace();
                 }
@@ -544,20 +496,14 @@ class gui implements MouseListener,MouseMotionListener
     }
     public void mouseMoved(MouseEvent me)
     {
-        /**
-         * if the current player doesnt require mouse
-         * then source must be a JButton 
-         * else it is the user trying to cheat
-         */
-        if(me.getSource() !=game.nowturnof.getMouseEventCauser())
-        return;
-                if(me.getX()>660)
-                return;
         if(!game.isGameActive())
         {
-            selcol=null;
             return;
         }
+        if(me.getSource() !=game.nowturnof.getMouseEventCauser())
+        return;
+        if(me.getX()>660)
+            return;
         goti g=goti.gotiAt(gui.guidelegate(new Point(me.getX(),me.getY()),false));
         if(g!=null)
         {
@@ -568,7 +514,6 @@ class gui implements MouseListener,MouseMotionListener
                 {
                     if(Smooth.inprogress==false)
                     highlighterTransit.execute(new Smooth(selcol,p));
-                    
                 }
             }
             else
@@ -588,224 +533,122 @@ class gui implements MouseListener,MouseMotionListener
     public void mouseExited(MouseEvent me)
     {
         selcol=null;
-        }
+    }
     public void mouseEntered(MouseEvent me)
     {
         
     }
     public void mouseDragged(MouseEvent me)
     {
-        /**
-         * if the current player doesnt require mouse
-         * then source must be a JButton 
-         * else it is the user trying to cheat
-         */
-        //CHECK IF THE CURRENT PLAYER EVEN REQUIRES MOUSE OR NOT
-        
         if(chaal==null)
-                return;
+            return;
         if(me.getSource() !=game.nowturnof.getMouseEventCauser())
-        return;  
-                if(chaal.teamCol.equals(game.nowturnof.getColor())==false  )
-                    {
-                        chaal.guiloc=chaalPrevLoc;
-                        chaal=null;
-                        return;
-                        
-                    }
-                int x=me.getX();
-                int y=me.getY();
-                //mousedragged(new Point((8*scalefactor)-x,(8*scalefactor)-y),(JComponent)me.getSource());
-                
-                chaal.guiloc.x=x-natDragX;
-                chaal.guiloc.y=y-natDragY;
-
-                refresh();
+            return;  
+        chaal.guiloc.x=me.getX()-natDragX;
+        chaal.guiloc.y=me.getY()-natDragY;
+        refresh();
     }
-            Point chaalPrevLoc;
-            static Point snapshotstart=null;
+    static Point snapshotstart=null;
     public void mousePressed(MouseEvent me)
     {
-        /**
-         * if the current player doesnt require mouse
-         * then source must be a JButton 
-         * else it is the user trying to cheat
-         */
         if(me.getSource() !=game.nowturnof.getMouseEventCauser())
         return;
-                
-               int x=me.getX();
-                int y=me.getY();
-                if(!isInBounds(x,y))
-                return;
-                    natDragX=((x)%scalefactor);
-                    natDragY=((y)%scalefactor);
-                  
-                    
-                    //int xInEngine=0,yInEngine=0;                    
-                
-                   Point onBoard=gui.guidelegate(new Point(x,y),false);
-                
-                    
-                    chaal=goti.gotiAt(onBoard);
-                    
-                    if(chaal==null)
-                    return;
-                    chaalPrevLoc=chaal.guiloc;
-                    if(chaal.teamCol.equals(game.nowturnof.getColor())==false  )
-                    {
-                        chaal=null;
-                        return;
-                        
-                    }
-                    
-                    if(chaal.statOfAct==false)
-                    {
-                        chaal=null;
-                        return;
-                    }
-                    
-                    snapshotstart=new Point( x -natDragX , y -natDragY );
-                    chaal.getRendering().selectedByUser();
-                     highlight=chaal.whatLocationsPossible();
-                     highlight.show();
-                        // selectcol=new Color(255, 232, 159);
-                      
-                         highlight.put(chaal.getLocation(),Environment.currentloccol);
-                //mousepressed(new Point((scalefactor*8)-x,(scalefactor*8)-y),(JComponent)me.getSource());
-                pan.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                    
-                
+        int x=me.getX();
+        int y=me.getY();
+        if(!isInBounds(x,y))
+            return;
+        natDragX=(x)%scalefactor;
+        natDragY=(y)%scalefactor;
+        Point onBoard=gui.guidelegate(new Point(x,y),false);
+        chaal=goti.gotiAt(onBoard);
+        if(chaal==null)
+            return;
+        snapshotstart=new Point( x -natDragX , y -natDragY );
+        chaal.getRendering().selectedByUser();
+        highlight=chaal.whatLocationsPossible();
+        highlight.show();
+        highlight.put(chaal.getLocation(),Environment.currentloccol);
+        pan.setCursor(new Cursor(Cursor.HAND_CURSOR));       
     }
     public void mouseReleased(MouseEvent me)
     {
-        /**
-         * if the current player doesnt require mouse
-         * then source must be a JButton 
-         * else it is the user trying to cheat
-         */
         if(me.getSource() !=game.nowturnof.getMouseEventCauser())
         return;
-        
-        
-              
-                try
-                {
-                if(chaal.teamCol.equals(game.nowturnof.getColor())==false  )
-                    {
-                        chaal=null;
-                        return;
-                        
-                    }
-                }
-                catch(Exception e)
-                {
-                    //faltu reason ka exception h ye
-                    //find a way to avoid cheating by quickly pressing mouse again to play in even opponent's turn in offline manual match
-                }
-                int x=me.getX();
-                int y=me.getY();
-                   
-                
-                   
-                
-                
-                if(x<=0 ||  x>=pan.getWidth()  ||  y<=0  ||  y>=pan.getHeight())
-                {
-                    x=5678;
-                    y=-2345;
-                }
-                Point land=gui.guidelegate(new Point(x,y),false);
-                pan.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                selcol=null;
-                chaalPrevLoc=null;
-               
-            if(chaal!=null )
+        int x=me.getX();
+        int y=me.getY();
+        if(x<=0 ||  x>=pan.getWidth()  ||  y<=0  ||  y>=pan.getHeight())//why even do it?does online mode still require it?
+        {
+            x=1111;
+            y=2222;
+        }
+        Point land=gui.guidelegate(new Point(x,y),false);
+        pan.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        selcol=null;
+        if(chaal!=null )
+        {
+            chaal.getRendering().releasedByUser();
+            highlight.remove(chaal.getLocation());
+            stepstaken did= chaal.movedTo(land);
+            goti k=did.whomKilled();
+            if( k!=null)
             {
-                 chaal.getRendering().releasedByUser();
-
-                     highlight.remove(chaal.getLocation());
-                   
-                   stepstaken did= chaal.movedTo(land);
-                   goti k;
-                   if( (k=did.whomKilled())!=null)
-                   {
-                        shockwave.execute(new Shockwave(x,y));
-                        audio.play("capture");
-                        k.getRendering().transit(Controls.offset(deadManager.getFreeLocation(k)),180);
-                        
-                    }
-                    
-                    if(did.validTurn())
-                    {
-                        if(did.whomKilled()==null)
-                        audio.play("put");
-                        if(k!=null)
-                        {
-                            lastt=new Color(241, 148, 138,240);
-                        }
-                        else
-                        {
-                            lastt=new Color(243, 156, 18,220);
-                        }
-                         chaal.getRendering().transit(guidelegate(chaal.getLocation(),true),0);
-                         new daemonOrderKeeper(chaal).start();
-                        gui.lastfrom=gui.guidelegate(new Point(did.getPrevBoardLoc().x,did.getPrevBoardLoc().y),true);
-                        gui.lastto=gui.guidelegate(new Point(chaal.getLocation().x,chaal.getLocation().y),true);
-                        
-                        lastmovealgebraic=did.getAlgebra();
-                        if(chaal.teamCol.equals(goti.colBlak))
-                        {
+                shockwave.execute(new Shockwave(x,y,k.teamCol));
+                audio.play("capture");
+                k.getRendering().transit(Controls.offset(deadManager.getFreeLocation(k)),180);
+            }
+            if(did.validTurn())
+            {
+                if(did.whomKilled()==null)
+                audio.play("put");
+                if(k!=null)
+                {
+                    lastt=new Color(241, 148, 138,240);
+                }
+                else
+                {
+                    lastt=new Color(243, 156, 18,220);
+                }
+                chaal.getRendering().transit(guidelegate(chaal.getLocation(),true),0);
+                gui.lastfrom=gui.guidelegate(new Point(did.getPrevBoardLoc().x,did.getPrevBoardLoc().y),true);
+                gui.lastto=gui.guidelegate(new Point(chaal.getLocation().x,chaal.getLocation().y),true);
+                lastmovealgebraic=did.getAlgebra();
+                if(chaal.teamCol.equals(goti.colBlak))
+                {
                             //dark gotis are unmappable,WHY?
                             //lastmovealgebraic.replace(goti.ghora,"");
                             //lastmovealgebraic.replace(goti.rani,"");
                             //lastmovealgebraic.replace(goti.mandir,"");
                             //lastmovealgebraic.replace(goti.hathi,"");
-                        }
-                        turnChange.execute(game.successfulTurn);
-                    }
-                    else
-                    {
-                        chaal.getRendering().transit(gui.guidelegate(new Point(did.getPrevBoardLoc().x,did.getPrevBoardLoc().y),true),360);
-                        audio.play("invalid");
-                        turnChange.execute(game.unsuccessfulTurn);
-                    }
-                    if(did.castlecontent!=null)
-                    {
-                        goti g=(goti)did.castlecontent[0];//the rook to be displaced due to castling
-                        g.getRendering().transit(guidelegate(g.getLocation(),true),360);
-                        audio.play("castle");
-                    }
-                    
-                    highlight.fadeAway();
-                        
-                    chaal=null;
-                    
+                }
+                turnChange.execute(game.successfulTurn);
             }
-            
-                  //mousereleased(new Point((8*scalefactor)-x,(8*scalefactor)-y),send,(JComponent)me.getSource());
-               
+            else
+            {
+                chaal.getRendering().transit(gui.guidelegate(did.getPrevBoardLoc(),true),360);
+                audio.play("invalid");
+                turnChange.execute(game.unsuccessfulTurn);
+            }
+            if(did.castlecontent!=null)
+            {
+                goti g=(goti)did.castlecontent[0];//the rook to be displaced due to castling
+                g.getRendering().transit(guidelegate(g.getLocation(),true),360);
+                audio.play("castle");
+            }
+            highlight.fadeAway();
+            chaal=null;      
+        }  
     }
     
     static Color lastf=new Color(247, 220, 111,80);
     static Color lastt=new Color(243, 156, 18,220);
-    
     static Point lastfrom=new Point(-90,-90),lastto=new Point(-90,-90);
     
-    //static Color blacksquare=new Color(161, 69, 36,220);
-    //static Color whitesquare=new Color(255,240,208,220);
-    //static volatile Color controlBackground=new Color(colortrans.b,colortrans.r,colortrans.g,200);
-    
-    
-    
-    
+    //option to change color of board squares!
     
     static class Ayush extends JPanel
     {
         public void paintComponent(Graphics gg)
         {
-            
-            
             Graphics2D g=(Graphics2D)gg;
             super.paintComponent(g);
             g.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
@@ -817,37 +660,29 @@ class gui implements MouseListener,MouseMotionListener
             g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
             
-           
-             boolean black=true;
-             //g.rotate(Math.toRadians(180));
-             ///g.translate(-(scalefactor*8),-(scalefactor*8));
-             
+            boolean black=true;
             for(int i=0;i<(scalefactor*8);i+=scalefactor)
             {
                 black=!black;
                 for(int j=0;j<(scalefactor*8);j+=scalefactor)
                 {
                     if(black==true)
-                {
-                    g.setColor(Environment.blacksquare);//previously 211, 84, 0
-                    g.fillRect(j,i,scalefactor,scalefactor);
-                    black=!black;
+                    {
+                        g.setColor(Environment.blacksquare);//previously 211, 84, 0
+                        g.fillRect(j,i,scalefactor,scalefactor);
+                        black=!black;
+                    }
+                    else//could not have used if    first case i have seen where if if is worse than if else
+                    {
+                        g.setColor(Environment.whitesquare);
+                        g.fillRect(j,i,scalefactor,scalefactor);
+                        black=!black;
+                    }
                 }
-                else//could not have used if    first case i have seen where if if is worse than if else
-                {
-                    g.setColor(Environment.whitesquare);
-                    g.fillRect(j,i,scalefactor,scalefactor);
-                    black=!black;
-                }
-                
-                }
-                
             }
             
-            
-                
-                //LEARN HOW WORKS!           
-           if(selcol!=null)
+            //LEARN HOW WORKS!           
+            if(selcol!=null  &&  game.isGameActive())
             {
                 //g.setColor(selectcol);
                 Point2D cent=new Point2D.Float(selcol.x+40,selcol.y+40);
@@ -881,88 +716,48 @@ class gui implements MouseListener,MouseMotionListener
                 g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
                 g.fill(new RoundRectangle2D.Double(lastto.x,lastto.y,scalefactor,scalefactor,65,65));
             }
-            
-                
-        if(highlight!=null  )
-        {
-              //highlight.show();
-                try
-                {
+            if(highlight!=null  )
+            {
                 for(Map.Entry<Point,Color> m : highlight.entrySet())//what syntax is involved here?
                 {
-                    //if(gui.dontShowPossLocFor.contains(game.nowturnof))
-                    //break;
                     if(highlight.isFor(game.nowturnof)==false)//is required?
                     break;
                     if(m.getValue()!=null  &&  m.getKey()!=null)
                     {
+                        if( ((Color)m.getValue()).equals(gui.castlecol)==false)
+                        {
+                            Color c=((Color)m.getValue());
+                            g.setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),(int)highlight.transparency));
+                        }
+                        else
+                            g.setColor(Environment.currentloccol);
                         
-                        
-                            if( ((Color)m.getValue()).equals(gui.castlecol)==false)
-                            {
-                                 Color c=((Color)m.getValue());
-                                 g.setColor(new Color(c.getRed(),c.getGreen(),c.getBlue(),(int)highlight.transparency));
-                            }
-                               
-                                else
-                                g.setColor(Environment.currentloccol);
-                            Point temp=guidelegate(((Point)m.getKey()),true);
-                                g.fill(new RoundRectangle2D.Double( temp.x,temp.y ,scalefactor,scalefactor,65,65));
-                        
-                        
+                        Point temp=guidelegate(((Point)m.getKey()),true);
+                        g.fill(new RoundRectangle2D.Double( temp.x,temp.y ,scalefactor,scalefactor,65,65));
                         
                     }
                 }
-              }
-              catch(ConcurrentModificationException e)
-              {
-                  System.out.println(e);
-              }
-            
-            
-        }
+            }
         
-            //g.setFont(new Font("Arial",Font.PLAIN,80));
-            //g.setColor(new Color(245, 203, 167));
+            
             g.setFont(new Font("LEIPFONT",Font.PLAIN,80));
             for(int i=0;i<game.pisse.size();i++)
             {
                 goti plot=game.pisse.get(i);
                 if(plot.equals(chaal))
                 continue;
-                
+                if(plot.guiloc.x>8*gui.scalefactor)
+                continue;
                 plot.getRendering().render(g);
-                
-                if((plot.guiloc.x>=0&&plot.guiloc.x<=getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=getHeight()) &&  plot.statOfAct ) 
-                {
-                    try
-                    {
-                        
-                    }
-                    catch(Exception e)
-                    {
-                        System.out.println(plot);
-                    }
-                }
-                   
             }
             if(chaal!=null)
             chaal.getRendering().render(g);//drawn later so that it is shown above all
-            
-            
             //drawing game board done
          
-        
-        MessageAnimator.drawContent(g);
-        
-                // draw shockwave
-        Shockwave.render(g);
-           
-      }
-      
+            MessageAnimator.drawContent(g);
+            Shockwave.render(g);
+        }
     }
-        
-    
     
     
     static double gf=0;
@@ -990,14 +785,10 @@ class gui implements MouseListener,MouseMotionListener
             int y=getHeight();
         
             
-          
-            
             g.setPaint(new LinearGradientPaint(new Point2D.Float(0,0),new Point2D.Float(0,y),new float[]{0.56f,0.84f},new Color[]{Environment.controlBackground,Environment.controlBackGradient}));
-            
             g.fillRect(0,0,x,y);
             g.setFont(new Font("LEIPFONT",Font.PLAIN,80));
             AffineTransform af=g.getTransform();
-            
             for(int i=0;i<game.pisse.size();i++)
             {
                 goti plot=game.pisse.get(i);
@@ -1005,37 +796,14 @@ class gui implements MouseListener,MouseMotionListener
                 continue;
                 if(plot.equals(chaal))
                 continue;
-                //if(plot.isInUse())
-                //continue;
                 g.setColor(plot.teamCol);
                 if(plot.statOfAct==true)
                 continue;
-                try
-                {
-                    if(!((plot.guiloc.x>=0&&plot.guiloc.x<=game.getChessBoard().pan.getWidth() && plot.guiloc.y>=0&&plot.guiloc.y<=game.getChessBoard().pan.getHeight()) ) &&  !plot.statOfAct )
-                    plot.getRendering().render(g);
-                }
-                catch(Exception e)
-                {
-                    System.out.println(e+" "+plot.tipo);
-                }
-                    
+                plot.getRendering().render(g);    
             }
-         
-            g.setTransform(af);
-             //g.setFont(null);
-        //g.setColor(Color.black);
-            
-            //g.drawLine(0,ggg,frame.getWidth(),ggg);
-           
-          
-        
+            g.setTransform(af); 
         }
     }
-    
-    static int a=0,b=0;
-    
-
     
     //true means logical board to gui coord conv
     //false means gui to logical board
@@ -1054,7 +822,6 @@ class gui implements MouseListener,MouseMotionListener
         } 
         else
         {
-            
             if(game.getHerePlayer().getColor().equals(goti.colWhit))
             {
                 return new Point(p.x/scalefactor,(7)-p.y/scalefactor);
@@ -1064,7 +831,6 @@ class gui implements MouseListener,MouseMotionListener
                 return new Point((7)-p.x/scalefactor,p.y/scalefactor);
             }
         }
-
     }
     static class labedit implements Runnable
     {
@@ -1085,20 +851,20 @@ class gui implements MouseListener,MouseMotionListener
     public static void takescreenshot()
     {
         BufferedImage b=new BufferedImage(hold.getWidth(),hold.getHeight(),BufferedImage.TYPE_INT_RGB);
-                Graphics2D gg=b.createGraphics();
-                frame.paint(gg);
-                String datea=new Date().toString();
-                datea=datea.replace(" ","_");
-                datea=datea.replace(":","_");
-                try
-                {
-                    ImageIO.write(b,"png",new File("D:/chessAyush/chessAyush"+datea+".png"));
-                }
-                catch (IOException ioe)
-                {
-                    ioe.printStackTrace();
-                }
-                h++;
+        Graphics2D gg=b.createGraphics();
+        frame.paint(gg);
+        String datea=new Date().toString();
+        datea=datea.replace(" ","_");
+        datea=datea.replace(":","_");
+        try
+        {
+            ImageIO.write(b,"png",new File("D:/chessAyush/chessAyush"+datea+".png"));
+        }
+        catch (IOException ioe)
+        {
+            ioe.printStackTrace();
+        }
+        h++;
     }
     
     static class boardPicture extends JPanel
@@ -1113,7 +879,6 @@ class gui implements MouseListener,MouseMotionListener
                 x=-25;
                 y=-25;
             }
-            
             else
             {
                 x=-30+6+1;
@@ -1138,7 +903,6 @@ class gui implements MouseListener,MouseMotionListener
     }
     public static boolean isInBounds(int x,int y)
     {
-        
         return (  (x>0&&x<game.getChessBoard().pan.getWidth() && y>0&&y<game.getChessBoard().pan.getHeight()));
     }
 }

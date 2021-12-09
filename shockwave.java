@@ -9,17 +9,20 @@ class Shockwave implements Runnable
     static Color white2=Color.WHITE;
     static Color black2=Color.BLACK;
     static Color white=white1,black=black1;
-    public Shockwave(int x, int y)
+    public Shockwave(int x, int y,Color col)
     {
         this.x=x;
         this.y=y;
-        
+        if(col==goti.colWhit)
+        shockwavecolor=white;
+        else
+        shockwavecolor=black;
     }
     public void run()
     {
         circlx=x;
         circly=y;
-        shockwavecolor=game.nowturnof.getColor().equals(goti.colWhit)?black:white;
+        
         double spd=6;
         while(circlr<650)
         {

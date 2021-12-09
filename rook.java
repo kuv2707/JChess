@@ -70,12 +70,7 @@ class rook extends goti
         this.lop=null;
         return steps;
     }
-    public rook(goti g)
-    {
-        super(g);
-        this.castlable=((rook)g).castlable;
-        tipo=goti.hathi;
-    }
+    
     ArrayList<Point> possibleLocations()
     {
         return getRectLocations(new ArrayList<Point>());

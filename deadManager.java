@@ -20,8 +20,8 @@ public class deadManager
     }
     public static Point getFreeLocation(goti g)
     {
-        if(g==null)
-        return null;
+        if(stacktop<stackbottom)
+        Environment.log("deadManager error");
         Point ret=null;
         if(g.teamCol.equals(game.getHerePlayer().getColor()))
         {

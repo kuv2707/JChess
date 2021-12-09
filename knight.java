@@ -11,11 +11,7 @@ class knight extends goti
         FENvalue='n';
         value=400;
     }
-    public knight(goti g)
-    {
-        super(g);
-        tipo=goti.ghora;
-    }
+    
     public knight(pawn g)
     {
         super(goti.ghora,g.getLocation(),g.teamCol);

@@ -11,11 +11,7 @@ class bishop extends goti
         FENvalue='b';
         value=300;
     }
-    public bishop(goti g)
-    {
-        super(g);
-        tipo=goti.mandir;
-    }
+    
     public bishop(pawn g)
     {
         super(goti.rani,g.getLocation(),g.teamCol);

@@ -15,11 +15,7 @@ class pawn extends goti
         FENvalue='p';
         value=100;
     }
-    public pawn(goti g)
-    {
-        super(g);
-        tipo=goti.pyada;
-    }
+    
     @Override
     public stepstaken movedTo(Point p)
     {

@@ -14,20 +14,20 @@ public class utility
         }
         public void run()
         {
-            float d=0;
-            while(d<1  &&  Environment.animLevel[3])
-            {
-                sub.setOpacity(d);
-                d+=0.03;
-                try
-                {
-                    Thread.sleep(15);
-                }
-                catch (InterruptedException ie)
-                {
-                    ie.printStackTrace();
-                }
-            }
+            //float d=0;
+            // while(d<1  &&  Environment.animLevel[3])
+            // {
+            //     sub.setOpacity(d);
+            //     d+=0.03;
+            //     try
+            //     {
+            //         Thread.sleep(15);
+            //     }
+            //     catch (InterruptedException ie)
+            //     {
+            //         ie.printStackTrace();
+            //     }
+            // }
             sub.setOpacity(1.0f);
         }
     }

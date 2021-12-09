@@ -12,11 +12,7 @@ class queen extends goti
         FENvalue='q';
         value=600;
     }
-    public queen(goti g)
-    {
-        super(g);
-        tipo=goti.rani;
-    }
+    
     public queen(pawn g)
     {
         super(goti.rani,g.getLocation(),g.teamCol);

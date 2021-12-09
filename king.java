@@ -15,12 +15,7 @@ class king extends goti
         FENvalue='k';
         value=650;
     }
-    public king(goti g)
-    {
-        super(g);
-        tipo=goti.raja;
-        this.castlable=((king)g).castlable;
-    }
+    
     @Override
     public stepstaken movedTo(Point p)
     {

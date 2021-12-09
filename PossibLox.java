@@ -26,13 +26,13 @@ class PossibLox<P,C> extends HashMap<Point,Color>
         {
             public void run()
             {
-                while(transparency<230)
+                while(transparency<240)
                 {
-                    transparency+=1;
+                    transparency+=3;
                     game.getChessBoard().refresh();
                     try
                     {
-                        Thread.sleep(1);
+                        Thread.sleep(6);
                     }
                     catch (InterruptedException ie)
                     {
@@ -50,11 +50,11 @@ class PossibLox<P,C> extends HashMap<Point,Color>
             {
                 while(transparency>0)
                 {
-                    transparency--;
+                    transparency-=3;
                     game.getChessBoard().refresh();
                     try
                     {
-                        Thread.sleep(1);
+                        Thread.sleep(6);
                     }
                     catch (InterruptedException ie)
                     {

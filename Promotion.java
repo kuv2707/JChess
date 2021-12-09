@@ -11,7 +11,7 @@ class Promotion extends JDialog implements MouseMotionListener,MouseListener
     static Image[] res;
     static optionPanel pan;
     final String[] names=new String[]{goti.rani,goti.hathi,goti.ghora,goti.mandir};
-    static int scale=80;
+    static int scale=gui.scalefactor;
     public Promotion(JFrame parent,Image[] g,Point location)
     {
         super(parent,"",true);
@@ -24,7 +24,7 @@ class Promotion extends JDialog implements MouseMotionListener,MouseListener
         setUndecorated(true);
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0,0,4*scale,scale-1,20,20));
-        setLocation(new Point(location.x,location.y+scale));
+        setLocation(new Point(location.x,location.y));
         setSize(4*scale,scale);
         setOpacity(0.90f);
         

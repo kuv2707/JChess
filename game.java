@@ -158,15 +158,9 @@ class game implements Runnable
     }
     public void run()
     {
-         Environment.log("initiated gui");
         gg=new gui();
-         
-        gg.initGuiLoc();
         gg.makeFrame();
-        
-        
-        
-        
+        Environment.log("initiated gui");
         gg.initThreads();
         for(Task t:startTasks)
         gui.gameEvents.execute(t);
@@ -179,7 +173,7 @@ class game implements Runnable
     }
     public static void setGameEnd()
     {
-        //assert(isGameActive==true);
+        assert(isGameActive==true);
         isGameActive=false;
         for(Task t:endTasks)
         gui.gameEvents.execute(t);

@@ -37,19 +37,7 @@ abstract class goti
     Color teamCol;
     rendering rend;
     goti killer=null;
-    public goti(goti g)
-    {
-        this.teamCol=g.teamCol;
-        this.location=(Point)g.location.clone();
-        this.tipo=new String(g.tipo);
-        this.statOfAct=g.statOfAct;
-        this.value=g.value;
-        this.FENvalue=g.FENvalue;
-        this.guiloc=(Point)g.guiloc.clone();
-        this.face=g.face;
-        this.size=g.size;
-        
-    }
+    
     public goti(String typeG,Point ubi,Color teamCol)
     {
         this.location=ubi;
@@ -59,6 +47,7 @@ abstract class goti
         this.statOfAct=true;
         this.size=new Point(gui.scalefactor,gui.scalefactor);
         this.setFace();
+        this.rend=new rendering(this,new Point(660,660));
     }
     public void setFace()
     {
@@ -125,11 +114,10 @@ abstract class goti
             face=game.whitQueen.getScaledInstance(size.x,size.y,Image.SCALE_SMOOTH);
         }
     }
-    //is opposite team piece in the passed point with respect to the caller object
     public void associate(rendering r)
     {
-        r.master=this;
         this.rend=r;
+        r.master=this;
     }
     public rendering getRendering()
     {

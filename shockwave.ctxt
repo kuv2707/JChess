@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Shockwave
-comment1.params=x\ y
-comment1.target=Shockwave(int,\ int)
+comment1.params=x\ y\ col
+comment1.target=Shockwave(int,\ int,\ java.awt.Color)
 comment2.params=
 comment2.target=void\ run()
 comment3.params=g
