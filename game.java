@@ -164,6 +164,7 @@ class game implements Runnable
         gg.initThreads();
         for(Task t:startTasks)
         gui.gameEvents.execute(t);
+        startTasks.clear();
         gui.turnChange.execute(successfulTurn);
         
     }
@@ -173,10 +174,11 @@ class game implements Runnable
     }
     public static void setGameEnd()
     {
-        assert(isGameActive==true);
+        //assert(isGameActive==true);not necessary
         isGameActive=false;
         for(Task t:endTasks)
         gui.gameEvents.execute(t);
+        endTasks.clear();
         
     }
     public static void loadimages(String folder)throws Exception

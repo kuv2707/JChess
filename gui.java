@@ -563,6 +563,11 @@ class gui implements MouseListener,MouseMotionListener
         chaal=goti.gotiAt(onBoard);
         if(chaal==null)
             return;
+        if(chaal.teamCol.equals(game.nowturnof.getColor()))
+        {
+            chaal=null;
+            return;
+        }
         snapshotstart=new Point( x -natDragX , y -natDragY );
         chaal.getRendering().selectedByUser();
         highlight=chaal.whatLocationsPossible();
