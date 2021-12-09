@@ -27,10 +27,10 @@ class Shockwave implements Runnable
         while(circlr<650)
         {
             circlr+=spd;
-            spd-=0.01;
+            spd-=0.03;
             try
             {
-                Thread.sleep(2);
+                Thread.sleep(5);
             }
             catch (InterruptedException ie)
             {
@@ -43,7 +43,7 @@ class Shockwave implements Runnable
     }
     public static void render(Graphics2D g)
     {
-        g.setStroke(new BasicStroke(5));
+        g.setStroke(new BasicStroke(7));
         g.setColor(shockwavecolor);
         g.drawOval(circlx-circlr,circly-circlr,2*circlr,2*circlr);
     }

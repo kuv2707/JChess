@@ -479,11 +479,11 @@ class gui implements MouseListener,MouseMotionListener
             while(k<=1)
             {
                 selcol=new Point( (int)(k*(end.x-start.x)+start.x),(int)(k*(end.y-start.y)+start.y));
-                k+=0.125;
+                k+=0.025;
                 gui.hold.repaint();
                 try
                 {
-                    Thread.sleep(5);
+                    Thread.sleep(1);
                 }
                 catch(InterruptedException ie)
                 {
