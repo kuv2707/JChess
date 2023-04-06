@@ -563,7 +563,7 @@ class gui implements MouseListener,MouseMotionListener
         chaal=goti.gotiAt(onBoard);
         if(chaal==null)
             return;
-        if(chaal.teamCol.equals(game.nowturnof.getColor()))
+        if(!chaal.teamCol.equals(game.nowturnof.getColor()))
         {
             chaal=null;
             return;
@@ -760,7 +760,7 @@ class gui implements MouseListener,MouseMotionListener
             //drawing game board done
          
             MessageAnimator.drawContent(g);
-            Shockwave.render(g);
+            Shockwave.drawContent(g);
         }
     }
     

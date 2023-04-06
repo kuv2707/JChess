@@ -24,13 +24,13 @@ class rendering
         g.setColor(master.teamCol);
         AffineTransform pre=g.getTransform();
         g.setTransform(new AffineTransform());
-        g.translate(master.guiloc.x+40,master.guiloc.y+40);//why add 40?
+        g.translate(master.guiloc.x*1.25+47,master.guiloc.y*1.25+40);//why add 40?
         /**
          * an offset of 40 needs to be added when repainting the holder of all jpanels
          * it is not needed for repainting the actual panel of pieces
          * but,, why!!!
          */
-        g.scale(scaling,scaling);
+        g.scale(scaling*1.3,scaling*1.3);
         g.rotate(Math.toRadians(paramangle));
         if(master.face!=null)
         g.drawImage(master.face,0,0,null);

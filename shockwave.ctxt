@@ -6,4 +6,6 @@ comment2.params=
 comment2.target=void\ run()
 comment3.params=g
 comment3.target=void\ render(java.awt.Graphics2D)
-numComments=4
+comment4.params=g
+comment4.target=void\ drawContent(java.awt.Graphics2D)
+numComments=5

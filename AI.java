@@ -80,7 +80,7 @@ class AI extends Player
         try
         {
             
-            p=new ProcessBuilder("D:\\chessAyush\\stockfishWin\\stockfish_14_x64_popcnt.exe").start();
+            p=new ProcessBuilder("D:\\chessAyush\\stockfishWin\\stockfish_15_1.exe").start();
             InputStream engI=p.getInputStream();
             OutputStream engO=p.getOutputStream();
             
