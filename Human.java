@@ -138,7 +138,6 @@ class Human extends Player
     @Override
     public void playMove() {
         
-        
     }
     @Override
     public void endMove() {
