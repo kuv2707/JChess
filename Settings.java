@@ -31,16 +31,16 @@ class Settings extends JPanel
                 {
                     game.folder="/"+change.getSelectedItem().toString().trim();
                     
-                     if(change.getSelectedItem().toString().equals(set[4]))
-                     {
-                         Shockwave.white=Shockwave.white2;
-                         Shockwave.black=Shockwave.black2;
-                     }
-                     else
-                     {
-                         Shockwave.white=Shockwave.white1;
-                         Shockwave.black=Shockwave.black1;
-                     }
+                    //  if(change.getSelectedItem().toString().equals(set[4]))
+                    //  {
+                    //      Shockwave.white=Shockwave.white2;
+                    //      Shockwave.black=Shockwave.black2;
+                    //  }
+                    //  else
+                    //  {
+                    //      Shockwave.white=Shockwave.white1;
+                    //      Shockwave.black=Shockwave.black1;
+                    //  }
                          new Thread(new Runnable()
                          {
                              public void run()

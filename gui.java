@@ -597,7 +597,7 @@ class gui implements MouseListener,MouseMotionListener
             goti k=did.whomKilled();
             if( k!=null)
             {
-                shockwave.execute(new Shockwave(x,y,k.teamCol));
+                // shockwave.execute(new Shockwave(x,y,k.teamCol));
                 audio.play("capture");
                 k.getRendering().transit(Controls.offset(deadManager.getFreeLocation(k)),180);
             }
@@ -760,7 +760,7 @@ class gui implements MouseListener,MouseMotionListener
             //drawing game board done
          
             MessageAnimator.drawContent(g);
-            Shockwave.drawContent(g);
+            // Shockwave.drawContent(g);
         }
     }
     
